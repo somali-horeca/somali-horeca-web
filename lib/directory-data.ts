@@ -17,18 +17,13 @@ export const CATEGORY_GROUPS = [
   "Strategy, Training & Sector Development",
 ] as const;
 
-// Full 27-category, 7-group structure, matching the client's real directory list exactly.
-// Counts are placeholder — replace once connected to Supabase.
 export const CATEGORIES: Category[] = [
-  // 1. Core Hospitality Operations
   { slug: "hotels-guest-houses", name: "Hotels and Guest Houses", code: "HTL", count: 0, group: "Core Hospitality Operations" },
   { slug: "restaurants-local-eateries", name: "Restaurants and Local Eateries", code: "RST", count: 0, group: "Core Hospitality Operations" },
   { slug: "cafes-tea-lounges", name: "Cafés and Tea Lounges", code: "CAF", count: 0, group: "Core Hospitality Operations" },
   { slug: "recreation-amusement-parks", name: "Recreation and Amusement Parks", code: "REC", count: 0, group: "Core Hospitality Operations" },
   { slug: "caterers-event-food", name: "Caterers and Event Food Services", code: "CAT", count: 0, group: "Core Hospitality Operations" },
   { slug: "bakeries-confectioneries", name: "Bakeries and Confectioneries", code: "BAK", count: 0, group: "Core Hospitality Operations" },
-
-  // 2. Supply Chain and Ingredients
   {
     slug: "food-fresh-produce-suppliers", name: "Food and Fresh Produce Suppliers", code: "FOD", count: 0,
     group: "Supply Chain and Ingredients",
@@ -40,8 +35,6 @@ export const CATEGORIES: Category[] = [
     subCategories: ["Green and Roasted Coffee Bean Wholesalers", "Premium Syrups, Sauces and Concentrates", "Bubble Tea Ingredients and Popping Boba", "Bottled Beverages and Juices"],
   },
   { slug: "uniform-apparel-suppliers", name: "Uniform & Apparel Suppliers", code: "UNI", count: 0, group: "Supply Chain and Ingredients" },
-
-  // 3. Equipment, Utilities and Infrastructure
   {
     slug: "commercial-kitchen-equipment", name: "Commercial Kitchen and Hospitality Equipment", code: "KIT", count: 0,
     group: "Equipment, Utilities and Infrastructure",
@@ -62,8 +55,6 @@ export const CATEGORIES: Category[] = [
     group: "Equipment, Utilities and Infrastructure",
     subCategories: ["Hotel Bedding & Mattresses", "Restaurant Tables & Seating"],
   },
-
-  // 4. Infrastructure, Design and Media
   {
     slug: "interior-designers-stagers", name: "Interior Designers & Stagers", code: "INT", count: 0,
     group: "Infrastructure, Design and Media",
@@ -79,8 +70,6 @@ export const CATEGORIES: Category[] = [
     group: "Infrastructure, Design and Media",
     subCategories: ["Food and Beverage Photography/Videography", "TikTok & Instagram Reel Content Creators", "Influencer Campaign Managers"],
   },
-
-  // 5. Technology & Financial Infrastructure
   {
     slug: "hospitality-technology", name: "Hospitality Technology Providers", code: "TEC", count: 0,
     group: "Technology & Financial Infrastructure",
@@ -91,8 +80,6 @@ export const CATEGORIES: Category[] = [
     group: "Technology & Financial Infrastructure",
     subCategories: ["Commercial Banking", "Mobile Wallet and Digital Payment Integrations (e.g., WAAFI)", "Micro-Financing for Hospitality SMEs"],
   },
-
-  // 6. Support Services and Logistics
   { slug: "logistics-freight-coldchain", name: "Logistics, Freight and Cold-Chain Companies", code: "LOG", count: 0, group: "Support Services and Logistics" },
   { slug: "commercial-cleaning", name: "Commercial Cleaning Specialists", code: "CLN", count: 0, group: "Support Services and Logistics" },
   { slug: "pest-control-hygiene", name: "Pest Control and Hygiene Professionals", code: "PST", count: 0, group: "Support Services and Logistics" },
@@ -106,15 +93,12 @@ export const CATEGORIES: Category[] = [
     group: "Support Services and Logistics",
     subCategories: ["Commercial Food Waste Disposal"],
   },
-
-  // 7. Strategy, Training & Sector Development
   { slug: "training-institutes-academies", name: "Training Institutes and Hospitality Academies", code: "TRN", count: 0, group: "Strategy, Training & Sector Development" },
   { slug: "staffing-recruitment", name: "Staffing and Recruitment Agencies", code: "STF", count: 0, group: "Strategy, Training & Sector Development" },
   { slug: "event-management-av", name: "Event Management and Audio Visual Production Companies", code: "EVT", count: 0, group: "Strategy, Training & Sector Development" },
   { slug: "development-partners", name: "Development Partners and Multilateral Agencies", code: "DEV", count: 0, group: "Strategy, Training & Sector Development" },
 ];
 
-// Full business profile fields, matching the vision doc's requirements exactly.
 export type MembershipTier = "Basic" | "Verified" | "Featured";
 
 export type Business = {
@@ -132,7 +116,6 @@ export type Business = {
   brochureUrl?: string;
 };
 
-// Placeholder listings, remapped to the new real category slugs — replace once connected to Supabase
 export const BUSINESSES: Business[] = [
   {
     slug: "horn-trade-supply",
@@ -196,4 +179,69 @@ export function searchBusinesses(query: string, categorySlug: string): Business[
     const matchesCategory = !categorySlug || b.categorySlug === categorySlug;
     return matchesQuery && matchesCategory;
   });
+}
+
+import { supabase } from "./supabase";
+
+function mapRowToBusiness(row: Record<string, unknown>): Business {
+  return {
+    slug: row.slug as string,
+    categorySlug: row.category_slug as string,
+    name: row.name as string,
+    overview: (row.overview as string) ?? "",
+    logoInitials: ((row.name as string) ?? "??").slice(0, 2).toUpperCase(),
+    productsAndServices: (row.products_and_services as string[]) ?? [],
+    contact: { phone: (row.phone as string) ?? "", email: (row.email as string) ?? "" },
+    location: (row.location as string) ?? "",
+    website: (row.website as string) ?? undefined,
+    social: (row.social_links as { platform: string; url: string }[]) ?? undefined,
+    membershipTier: (row.membership_tier as MembershipTier) ?? "Basic",
+    brochureUrl: (row.brochure_url as string) ?? undefined,
+  };
+}
+
+export async function getAllApprovedBusinessesDB(): Promise<Business[]> {
+  const { data, error } = await supabase
+    .from("businesses")
+    .select("*")
+    .eq("status", "approved");
+
+  if (error || !data) {
+    console.error("Supabase error (getAllApprovedBusinessesDB):", error);
+    return [];
+  }
+  return data.map(mapRowToBusiness);
+}
+
+export async function getBusinessesInCategoryDB(categorySlug: string): Promise<Business[]> {
+  const { data, error } = await supabase
+    .from("businesses")
+    .select("*")
+    .eq("status", "approved")
+    .eq("category_slug", categorySlug);
+
+  if (error || !data) {
+    console.error("Supabase error (getBusinessesInCategoryDB):", error);
+    return [];
+  }
+  return data.map(mapRowToBusiness);
+}
+
+export async function getBusinessDB(
+  categorySlug: string,
+  businessSlug: string
+): Promise<Business | undefined> {
+  const { data, error } = await supabase
+    .from("businesses")
+    .select("*")
+    .eq("status", "approved")
+    .eq("category_slug", categorySlug)
+    .eq("slug", businessSlug)
+    .maybeSingle();
+
+  if (error || !data) {
+    console.error("Supabase error (getBusinessDB):", error);
+    return undefined;
+  }
+  return mapRowToBusiness(data);
 }

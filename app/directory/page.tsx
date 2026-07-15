@@ -1,9 +1,13 @@
 import Link from "next/link";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import DirectorySearch from "@/components/DirectorySearch";
-import { CATEGORIES, CATEGORY_GROUPS } from "@/lib/directory-data";
+import { CATEGORIES, CATEGORY_GROUPS, getAllApprovedBusinessesDB } from "@/lib/directory-data";
 
-export default function Directory() {
+export const dynamic = "force-dynamic";
+
+export default async function Directory() {
+  const businesses = await getAllApprovedBusinessesDB();
+
   return (
     <>
       <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Directory" }]} />
@@ -15,19 +19,12 @@ export default function Directory() {
           </div>
           <h1 className="font-serif text-3xl font-bold md:text-4xl">Business Directory</h1>
           <p className="mt-4 max-w-2xl text-ink/70">
-            Somalia&apos;s verified hospitality directory — hotels, restaurants, suppliers,
-            professional services, and investment partners in one place.
+            Somalia&apos;s verified hospitality directory, connecting hotels, restaurants,
+            suppliers, professional services, and investment partners in one place.
           </p>
 
-          <div className="mt-6 rounded-md border border-dashed border-ink/25 bg-paper-dark p-5 text-sm text-ink/70">
-            <strong className="text-gold-dark">Not yet connected to a real database.</strong>{" "}
-            Categories and listings below are placeholder data from{" "}
-            <code className="font-mono text-xs">lib/directory-data.ts</code> — replace with
-            Supabase once that&apos;s set up.
-          </div>
-
           <div className="mt-10">
-            <DirectorySearch />
+            <DirectorySearch businesses={businesses} />
           </div>
 
           {CATEGORY_GROUPS.map((group) => (
@@ -44,7 +41,9 @@ export default function Directory() {
                       {cat.code}
                     </div>
                     <h3 className="font-semibold">{cat.name}</h3>
-                    <div className="mt-1 font-mono text-xs text-ink/50">{cat.count} listed</div>
+                    <div className="mt-1 font-mono text-xs text-ink/50">
+                      {businesses.filter((b) => b.categorySlug === cat.slug).length} listed
+                    </div>
                   </Link>
                 ))}
               </div>

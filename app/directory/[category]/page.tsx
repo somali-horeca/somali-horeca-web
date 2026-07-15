@@ -1,7 +1,9 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import Breadcrumbs from "@/components/Breadcrumbs";
-import { getCategory, getBusinessesInCategory } from "@/lib/directory-data";
+import { getCategory, getBusinessesInCategoryDB } from "@/lib/directory-data";
+
+export const dynamic = "force-dynamic";
 
 export default async function CategoryPage({
   params,
@@ -12,7 +14,7 @@ export default async function CategoryPage({
   const category = getCategory(categorySlug);
   if (!category) notFound();
 
-  const businesses = getBusinessesInCategory(categorySlug);
+  const businesses = await getBusinessesInCategoryDB(categorySlug);
 
   return (
     <>
@@ -52,7 +54,7 @@ export default async function CategoryPage({
 
           {businesses.length === 0 ? (
             <div className="mt-10 rounded-md border border-dashed border-ink/25 bg-paper-dark p-8 text-center text-ink/60">
-              No placeholder listings yet for this category — will populate once real data is added.
+              No businesses listed yet in this category.
             </div>
           ) : (
             <div className="mt-10 grid gap-5 md:grid-cols-3">

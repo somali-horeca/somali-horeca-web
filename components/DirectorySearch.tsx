@@ -2,14 +2,29 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { CATEGORIES, searchBusinesses, getCategory } from "@/lib/directory-data";
+import { CATEGORIES, getCategory, type Business } from "@/lib/directory-data";
 
-export default function DirectorySearch() {
+function searchWithin(businesses: Business[], query: string, categorySlug: string): Business[] | null {
+  const q = query.toLowerCase().trim();
+  if (!q && !categorySlug) return null;
+
+  return businesses.filter((b) => {
+    const matchesQuery =
+      !q ||
+      b.name.toLowerCase().includes(q) ||
+      b.overview.toLowerCase().includes(q) ||
+      b.productsAndServices.some((p) => p.toLowerCase().includes(q));
+    const matchesCategory = !categorySlug || b.categorySlug === categorySlug;
+    return matchesQuery && matchesCategory;
+  });
+}
+
+export default function DirectorySearch({ businesses }: { businesses: Business[] }) {
   const [query, setQuery] = useState("");
   const [categorySlug, setCategorySlug] = useState("");
   const [submitted, setSubmitted] = useState(false);
 
-  const results = submitted ? searchBusinesses(query, categorySlug) : null;
+  const results = submitted ? searchWithin(businesses, query, categorySlug) : null;
   const hasSearched = results !== null;
 
   return (
@@ -48,7 +63,7 @@ export default function DirectorySearch() {
         </button>
       </form>
       <p className="mt-2 text-xs text-ink/50">
-        Type a keyword, pick a category, or both — either works on its own.
+        Type a keyword, pick a category, or both, either works on its own.
       </p>
 
       {hasSearched && (
@@ -60,8 +75,7 @@ export default function DirectorySearch() {
           </div>
           {results!.length === 0 ? (
             <div className="rounded-md border border-dashed border-ink/25 bg-paper-dark p-6 text-sm text-ink/60">
-              No placeholder listings match yet — search will return real results once the
-              directory is connected to Supabase.
+              No businesses match yet.
             </div>
           ) : (
             <div className="grid gap-4 md:grid-cols-2">
