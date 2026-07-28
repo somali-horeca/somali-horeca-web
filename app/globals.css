@@ -4,13 +4,14 @@
   --color-ink: #1c140f;
   --color-paper: #f0efeb;
   --color-paper-dark: #f0efeb;
-  --color-red: #df1d25;
-  --color-red-dark: #a8151b;
+  --color-red: #e2554c;
+  --color-red-dark: #b8362e;
   --color-blue: #4387ce;
   --color-blue-dark: #2c5f94;
   --color-blue-tint: #b9d1e6;
   --color-gold: #faa70d;
   --color-gold-dark: #c17f09;
+  --color-header: #4a9fd8;
 }
 
 @theme inline {
@@ -24,6 +25,7 @@
   --color-blue-tint: var(--color-blue-tint);
   --color-gold: var(--color-gold);
   --color-gold-dark: var(--color-gold-dark);
+  --color-header: var(--color-header);
   --font-display: var(--font-display);
   --font-body: var(--font-body);
   --font-mono: var(--font-mono);
@@ -36,4 +38,83 @@ body {
 
 .font-serif {
   font-family: var(--font-display), serif;
+}
+
+/* Slide-show style entrance used by HeroSlider when a slide changes —
+   the new photo slides in from the right with a slight scale, like an
+   actual presentation transition, rather than just a plain opacity fade. */
+@keyframes hero-slide-in {
+  from {
+    opacity: 0;
+    transform: translateX(6%) scale(1.04);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+.animate-hero-fade {
+  animation: hero-slide-in 0.8s cubic-bezier(0.25, 0.8, 0.35, 1);
+}
+
+/* Caption fades/rises in slightly after the photo starts moving, so text
+   doesn't feel like it's fighting the photo's motion. */
+@keyframes hero-caption-in {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-hero-caption {
+  animation: hero-caption-in 0.7s ease-out 0.15s both;
+}
+
+/* Slow diagonal shimmer sweep used on Diamond sponsor slots, to mark that
+   tier as visually "premium" even while logos are still placeholders. */
+@keyframes diamond-shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.animate-diamond-shimmer {
+  animation: diamond-shimmer 3.5s ease-in-out infinite;
+}
+
+/* Continuous auto-scrolling logo row, like a screensaver — pauses on
+   hover/touch via the [animation-play-state:paused] class in
+   LogoMarquee.tsx so a visitor can pause it to read a logo. */
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes marquee-reverse {
+  from {
+    transform: translateX(-50%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 22s linear infinite;
+}
+
+.animate-marquee-reverse {
+  animation: marquee-reverse 26s linear infinite;
 }

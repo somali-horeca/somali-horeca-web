@@ -1,10 +1,7 @@
 import Link from "next/link";
+import Image from "next/image";
 import HeroSlider from "@/components/HeroSlider";
-import HomeSidebar from "@/components/HomeSidebar";
-import NewsTicker from "@/components/NewsTicker";
 import PlatformIntro from "@/components/PlatformIntro";
-import PillarTiles from "@/components/PillarTiles";
-import StatsBar from "@/components/StatsBar";
 import FeaturedBusinesses from "@/components/FeaturedBusinesses";
 import UpcomingExpoBanner from "@/components/UpcomingExpoBanner";
 import SponsorsStrip from "@/components/SponsorsStrip";
@@ -12,41 +9,31 @@ import FinalCTA from "@/components/FinalCTA";
 import { LAUNCHES } from "@/lib/launches-data";
 
 const NEWS = [
-  { title: "Somali HORECA Platform launches business directory beta", date: "July 2026" },
-  { title: "Registration opens for the first Somali HORECA Expo", date: "July 2026" },
-  { title: "Business Growth Network membership tiers announced", date: "July 2026" },
+  {
+    title: "Somali HORECA Platform launches business directory beta",
+    date: "July 2026",
+    photo: "https://picsum.photos/seed/horeca-news-1/600/400",
+  },
+  {
+    title: "Registration opens for the first Somali HORECA Expo",
+    date: "July 2026",
+    photo: "https://picsum.photos/seed/horeca-news-2/600/400",
+  },
+  {
+    title: "Business Growth Network membership tiers announced",
+    date: "July 2026",
+    photo: "https://picsum.photos/seed/horeca-news-3/600/400",
+  },
 ];
 
 export default function Home() {
   return (
     <>
-      {/* Hero: solid-color slider (left) + sidebar (right) — full width, no outer box */}
-      <div className="mx-auto grid max-w-6xl md:grid-cols-[2.4fr_1fr]">
-        <HeroSlider />
-        <HomeSidebar />
-      </div>
-
-      {/* News ticker */}
-      <div className="mx-auto max-w-6xl">
-        <NewsTicker />
-      </div>
+      {/* Hero: full-width photo slider, no sidebar — matches the reference site's edge-to-edge banner */}
+      <HeroSlider />
 
       {/* "Somali HORECA" platform explainer */}
       <PlatformIntro />
-
-      {/* "One Platform. Three Ways to Grow." */}
-      <section className="px-6 py-16">
-        <div className="mx-auto max-w-6xl">
-          <div className="font-mono text-xs text-blue-dark">One Platform. Three Ways to Grow.</div>
-          <h2 className="mt-2 font-serif text-xl font-semibold">Here&apos;s how we help you</h2>
-          <div className="mt-5">
-            <PillarTiles />
-          </div>
-        </div>
-      </section>
-
-      {/* Stats bar */}
-      <StatsBar />
 
       {/* "Here's what's happening" */}
       <section className="px-6 py-16">
@@ -96,12 +83,19 @@ export default function Home() {
                 View all →
               </Link>
             </div>
-            <div className="mt-4 grid gap-3 md:grid-cols-3">
+            <div className="mt-4 grid gap-5 md:grid-cols-3">
               {NEWS.map((n) => (
-                <div key={n.title} className="rounded-md p-4">
-                  <div className="mb-2 h-20 rounded bg-blue-tint" />
-                  <div className="font-mono text-[11px] text-ink/50">{n.date}</div>
-                  <h4 className="mt-1 text-sm font-semibold">{n.title}</h4>
+                <div
+                  key={n.title}
+                  className="overflow-hidden rounded-md bg-paper-dark transition hover:bg-gold/10"
+                >
+                  <div className="relative h-40 w-full">
+                    <Image src={n.photo} alt="" fill className="object-cover" sizes="(min-width: 768px) 33vw, 100vw" />
+                  </div>
+                  <div className="p-4">
+                    <div className="font-mono text-[11px] text-ink/50">{n.date}</div>
+                    <h4 className="mt-1.5 text-base font-semibold leading-snug">{n.title}</h4>
+                  </div>
                 </div>
               ))}
             </div>

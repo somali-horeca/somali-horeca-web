@@ -207,7 +207,12 @@ export async function getAllApprovedBusinessesDB(): Promise<Business[]> {
     .eq("status", "approved");
 
   if (error || !data) {
-    console.error("Supabase error (getAllApprovedBusinessesDB):", error);
+    console.error("Supabase error (getAllApprovedBusinessesDB):", {
+      message: error?.message,
+      code: error?.code,
+      details: error?.details,
+      hint: error?.hint,
+    });
     return [];
   }
   return data.map(mapRowToBusiness);
@@ -221,7 +226,12 @@ export async function getBusinessesInCategoryDB(categorySlug: string): Promise<B
     .eq("category_slug", categorySlug);
 
   if (error || !data) {
-    console.error("Supabase error (getBusinessesInCategoryDB):", error);
+    console.error("Supabase error (getBusinessesInCategoryDB):", {
+      message: error?.message,
+      code: error?.code,
+      details: error?.details,
+      hint: error?.hint,
+    });
     return [];
   }
   return data.map(mapRowToBusiness);
@@ -240,7 +250,12 @@ export async function getBusinessDB(
     .maybeSingle();
 
   if (error || !data) {
-    console.error("Supabase error (getBusinessDB):", error);
+    console.error("Supabase error (getBusinessDB):", {
+      message: error?.message,
+      code: error?.code,
+      details: error?.details,
+      hint: error?.hint,
+    });
     return undefined;
   }
   return mapRowToBusiness(data);

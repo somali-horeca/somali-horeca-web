@@ -1,5 +1,14 @@
 import Link from "next/link";
+import Image from "next/image";
 import { BUSINESSES, getCategory } from "@/lib/directory-data";
+
+// PLACEHOLDER PHOTOS from Lorem Picsum — swap for each business's real
+// storefront/product photography once available.
+const PLACEHOLDER_PHOTOS = [
+  "https://picsum.photos/seed/horeca-biz-1/600/400",
+  "https://picsum.photos/seed/horeca-biz-2/600/400",
+  "https://picsum.photos/seed/horeca-biz-3/600/400",
+];
 
 export default function FeaturedBusinesses() {
   const businesses = BUSINESSES.slice(0, 3);
@@ -13,18 +22,28 @@ export default function FeaturedBusinesses() {
         </Link>
       </div>
 
-      <div className="mt-6 grid gap-5 md:grid-cols-3">
-        {businesses.map((b) => {
+      <div className="mt-6 grid gap-6 md:grid-cols-3">
+        {businesses.map((b, i) => {
           const category = getCategory(b.categorySlug);
           return (
             <Link
               key={b.slug}
               href={`/directory/${b.categorySlug}/${b.slug}`}
-              className="rounded-md bg-paper-dark p-5 transition hover:bg-gold/10"
+              className="group overflow-hidden rounded-md bg-paper-dark transition hover:bg-gold/10"
             >
-              <div className="h-28 rounded bg-gradient-to-br from-blue to-ink" />
-              <h4 className="mt-3 font-semibold">{b.name}</h4>
-              <div className="mt-1 text-xs text-ink/50">{category?.name}</div>
+              <div className="relative h-44 w-full">
+                <Image
+                  src={PLACEHOLDER_PHOTOS[i % PLACEHOLDER_PHOTOS.length]}
+                  alt=""
+                  fill
+                  className="object-cover transition group-hover:scale-105"
+                  sizes="(min-width: 768px) 33vw, 100vw"
+                />
+              </div>
+              <div className="p-5">
+                <h4 className="text-xl font-semibold">{b.name}</h4>
+                <div className="mt-1 text-base text-ink/50">{category?.name}</div>
+              </div>
             </Link>
           );
         })}

@@ -1,0 +1,32 @@
+import Link from "next/link";
+
+// Update the number to the real business WhatsApp line before launch.
+const WHATSAPP_NUMBER = "252600000000";
+
+export default function FloatingActions() {
+  return (
+    <div className="pointer-events-none fixed inset-x-0 bottom-0 z-40">
+      <div className="mx-auto flex max-w-6xl items-end justify-between px-4 pb-4 sm:px-6">
+        <a
+          href={`https://wa.me/${WHATSAPP_NUMBER}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Chat on WhatsApp"
+          className="pointer-events-auto flex h-12 w-12 items-center justify-center rounded-full bg-[#25D366] text-paper shadow-lg transition hover:opacity-90"
+        >
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" />
+            <path d="M12.001 2C6.478 2 2 6.478 2 12c0 1.9.529 3.68 1.447 5.197L2 22l4.938-1.396A9.96 9.96 0 0 0 12.001 22C17.524 22 22 17.522 22 12S17.524 2 12.001 2zm0 18.06a8.03 8.03 0 0 1-4.334-1.267l-.311-.185-3.037.859.814-2.98-.203-.306A8.03 8.03 0 1 1 20.03 12c0 4.437-3.594 8.06-8.029 8.06z" />
+          </svg>
+        </a>
+
+        <Link
+          href="/expo"
+          className="pointer-events-auto rounded-sm bg-red px-5 py-2.5 text-sm font-semibold text-paper shadow-lg hover:opacity-90"
+        >
+          Register Now
+        </Link>
+      </div>
+    </div>
+  );
+}

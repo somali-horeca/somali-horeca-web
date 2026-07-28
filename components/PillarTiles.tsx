@@ -46,11 +46,11 @@ export default function PillarTiles() {
         <Link
           key={p.name}
           href={p.href}
-          className="rounded-md border border-ink/15 p-4 transition hover:border-gold"
+          className="rounded-md border border-ink/15 p-6 transition hover:border-gold"
         >
           {p.icon}
-          <h3 className="mt-2.5 text-sm font-semibold text-ink">{p.name}</h3>
-          <p className="mt-1 text-xs text-ink/60">{p.desc}</p>
+          <h3 className="mt-3 text-lg font-semibold text-ink">{p.name}</h3>
+          <p className="mt-1 text-base text-ink/60">{p.desc}</p>
         </Link>
       ))}
     </div>
