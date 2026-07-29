@@ -30,7 +30,7 @@ export default function Footer() {
       <div className="mx-auto max-w-6xl px-6 py-14">
         <div className="grid grid-cols-1 gap-10 md:grid-cols-4">
           <div>
-            <Image src="/logo.png" alt="Somali HORECA" width={32} height={38} />
+            <Image src="/logo.png" alt="Somali HORECA" width={32} height={38} className="h-[38px] w-[32px]" />
             <div className="mt-3 font-serif text-lg font-bold text-paper">Somali HORECA</div>
             <p className="mt-2 text-base text-paper/70">
               The digital infrastructure of Somalia&apos;s hospitality economy.

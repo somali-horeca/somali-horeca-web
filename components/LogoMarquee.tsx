@@ -32,7 +32,8 @@ export default function LogoMarquee({
   const tiles = Array.from({ length: count }).map((_, i) => (
     <div
       key={i}
-      className={`relative flex shrink-0 items-center justify-center overflow-hidden rounded-md border-2 ${tileBorder} ${tileSize}`}
+      style={{ animationDelay: `${i * 0.08}s` }}
+      className={`animate-logo-in relative flex shrink-0 items-center justify-center overflow-hidden rounded-md border-2 ${tileBorder} ${tileSize}`}
     >
       <Image
         src={`https://picsum.photos/seed/${seedPrefix}-${i + 1}/260/160`}

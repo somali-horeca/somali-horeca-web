@@ -11,6 +11,8 @@ const NAV_LINKS = [
   { href: "/expo", label: "Expo" },
   { href: "/membership", label: "Membership" },
   { href: "/resources", label: "Resources" },
+  { href: "/news", label: "News" },
+  { href: "/gallery", label: "Gallery" },
   { href: "/contact", label: "Contact" },
 ];
 
@@ -21,16 +23,16 @@ function HeaderCountdown() {
   const time = useCountdown();
 
   return (
-    <div className="hidden items-center gap-1.5 sm:flex">
+    <div className="hidden items-center gap-2 sm:flex">
       {(["days", "hours", "minutes", "seconds"] as const).map((unit) => (
         <div
           key={unit}
-          className="flex h-10 w-10 flex-col items-center justify-center rounded-sm bg-paper shadow-sm"
+          className="flex h-12 w-12 flex-col items-center justify-center rounded-sm border border-paper/60 bg-paper/20 shadow-sm"
         >
-          <span className="font-mono text-xs font-bold text-ink tabular-nums">
+          <span className="font-mono text-base font-bold text-paper tabular-nums">
             {time ? (unit === "days" ? time.days : pad(time[unit])) : "--"}
           </span>
-          <span className="text-[7px] uppercase tracking-wide text-ink/60">
+          <span className="text-[8px] uppercase tracking-wide text-paper/90">
             {unit === "days" ? "d" : unit === "hours" ? "h" : unit === "minutes" ? "m" : "s"}
           </span>
         </div>
@@ -56,17 +58,17 @@ export default function Header() {
           links live only in the slide-out panel below, at every screen
           size, matching the reference site's pattern rather than
           duplicating a separate desktop nav row here. */}
-      <div className="mx-auto flex max-w-6xl items-center gap-3 overflow-hidden px-4 py-3 sm:px-6">
+      <div className="mx-auto flex max-w-6xl items-center gap-5 overflow-hidden px-4 py-3.5 sm:px-6">
         <Link href="/" className="flex shrink-0 items-center gap-2.5" onClick={() => setOpen(false)}>
-          <Image src="/logo.png" alt="Somali HORECA" width={50} height={58} priority />
+          <Image src="/logo.png" alt="Somali HORECA" width={50} height={58} priority className="h-[58px] w-[50px]" />
           <div className="hidden font-serif text-xl font-bold leading-none text-paper sm:block">
             Somali HORECA
           </div>
         </Link>
 
-        <div className="hidden shrink-0 whitespace-nowrap rounded-sm bg-ink px-4 py-1.5 leading-tight text-paper md:block">
-          <div className="font-mono text-xs font-bold">{EXPO_DATE_RANGE}</div>
-          <div className="text-[9px] text-paper/75">{EXPO_VENUE}</div>
+        <div className="ml-2 hidden shrink-0 whitespace-nowrap rounded-sm bg-blue-dark px-4 py-2 leading-tight text-paper md:block">
+          <div className="font-mono text-xs font-bold text-paper">{EXPO_DATE_RANGE}</div>
+          <div className="text-[9px] text-paper/85">{EXPO_VENUE}</div>
         </div>
 
         <div className="flex-1" />
@@ -75,7 +77,7 @@ export default function Header() {
 
         <Link
           href="/expo"
-          className="shrink-0 whitespace-nowrap rounded-sm bg-red px-4 py-2 text-sm font-semibold text-paper hover:opacity-90"
+          className="ml-1 shrink-0 whitespace-nowrap rounded-sm bg-red px-4 py-2 text-sm font-semibold text-paper hover:opacity-90"
         >
           Register Now
         </Link>
@@ -85,7 +87,7 @@ export default function Header() {
           aria-label={open ? "Close menu" : "Open menu"}
           aria-expanded={open}
           onClick={() => setOpen((v) => !v)}
-          className="flex h-9 w-9 shrink-0 flex-col items-center justify-center gap-1.5 rounded-sm border border-paper/35"
+          className="ml-1 flex h-9 w-9 shrink-0 flex-col items-center justify-center gap-1.5 rounded-sm border border-paper/35"
         >
           <span
             className={`block h-[1.5px] w-4 bg-paper transition ${open ? "translate-y-[5.5px] rotate-45" : ""}`}

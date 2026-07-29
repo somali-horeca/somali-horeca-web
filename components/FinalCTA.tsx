@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function FinalCTA() {
   return (
-    <section className="bg-red px-6 py-16 text-paper">
+    <section className="bg-sponsor-bg px-6 py-16 text-paper">
       <div className="mx-auto max-w-2xl text-center">
         <h2 className="font-serif text-2xl font-semibold md:text-3xl">
           Ready to grow your hospitality business?

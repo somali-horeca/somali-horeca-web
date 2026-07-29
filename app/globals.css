@@ -12,6 +12,8 @@
   --color-gold: #faa70d;
   --color-gold-dark: #c17f09;
   --color-header: #4a9fd8;
+  --color-coffee: #4a3226;
+  --color-sponsor-bg: #2e3548;
 }
 
 @theme inline {
@@ -26,6 +28,8 @@
   --color-gold: var(--color-gold);
   --color-gold-dark: var(--color-gold-dark);
   --color-header: var(--color-header);
+  --color-coffee: var(--color-coffee);
+  --color-sponsor-bg: var(--color-sponsor-bg);
   --font-display: var(--font-display);
   --font-body: var(--font-body);
   --font-mono: var(--font-mono);
@@ -117,4 +121,29 @@ body {
 
 .animate-marquee-reverse {
   animation: marquee-reverse 26s linear infinite;
+}
+
+/* Soft glow on white text, used in the Sponsors section so headings feel
+   like they have light behind them rather than flat/static white. */
+.text-glow {
+  text-shadow: 0 0 12px rgba(255, 255, 255, 0.9), 0 0 24px rgba(255, 255, 255, 0.5);
+}
+
+/* Logo tiles fade + scale in on page load, rather than just appearing
+   flatly. Works for the placeholder tiles now, and will apply the same
+   way once real sponsor logos (e.g. an actual Toyota logo) are dropped
+   into these same boxes. */
+@keyframes logo-pop-in {
+  from {
+    opacity: 0;
+    transform: scale(0.85);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-logo-in {
+  animation: logo-pop-in 0.6s cubic-bezier(0.25, 0.8, 0.35, 1) both;
 }

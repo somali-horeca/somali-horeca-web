@@ -7,24 +7,12 @@ import UpcomingExpoBanner from "@/components/UpcomingExpoBanner";
 import SponsorsStrip from "@/components/SponsorsStrip";
 import FinalCTA from "@/components/FinalCTA";
 import { LAUNCHES } from "@/lib/launches-data";
+import { NEWS_ITEMS } from "@/lib/news-data";
 
-const NEWS = [
-  {
-    title: "Somali HORECA Platform launches business directory beta",
-    date: "July 2026",
-    photo: "https://picsum.photos/seed/horeca-news-1/600/400",
-  },
-  {
-    title: "Registration opens for the first Somali HORECA Expo",
-    date: "July 2026",
-    photo: "https://picsum.photos/seed/horeca-news-2/600/400",
-  },
-  {
-    title: "Business Growth Network membership tiers announced",
-    date: "July 2026",
-    photo: "https://picsum.photos/seed/horeca-news-3/600/400",
-  },
-];
+// PLACEHOLDER PHOTOS for the homepage Gallery preview — swap for real photos
+const GALLERY_PREVIEW = Array.from({ length: 4 }).map(
+  (_, i) => `https://picsum.photos/seed/horeca-gallery-${i + 1}/600/600`
+);
 
 export default function Home() {
   return (
@@ -35,11 +23,8 @@ export default function Home() {
       {/* "Somali HORECA" platform explainer */}
       <PlatformIntro />
 
-      {/* "Here's what's happening" */}
-      <section className="px-6 py-16">
+      <section className="bg-blue-tint px-6 py-16">
         <div className="mx-auto max-w-6xl">
-          <div className="font-mono text-xs text-gold-dark">Here&apos;s what&apos;s happening</div>
-
           <div className="mt-6">
             <FeaturedBusinesses />
           </div>
@@ -75,36 +60,67 @@ export default function Home() {
               </div>
             )}
           </div>
-
-          <div className="mt-8">
-            <div className="flex items-baseline justify-between">
-              <h3 className="text-sm font-semibold">Latest news</h3>
-              <Link href="/resources" className="text-xs font-semibold text-gold-dark hover:opacity-80">
-                View all →
-              </Link>
-            </div>
-            <div className="mt-4 grid gap-5 md:grid-cols-3">
-              {NEWS.map((n) => (
-                <div
-                  key={n.title}
-                  className="overflow-hidden rounded-md bg-paper-dark transition hover:bg-gold/10"
-                >
-                  <div className="relative h-40 w-full">
-                    <Image src={n.photo} alt="" fill className="object-cover" sizes="(min-width: 768px) 33vw, 100vw" />
-                  </div>
-                  <div className="p-4">
-                    <div className="font-mono text-[11px] text-ink/50">{n.date}</div>
-                    <h4 className="mt-1.5 text-base font-semibold leading-snug">{n.title}</h4>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
         </div>
       </section>
 
       {/* Sponsors strip */}
       <SponsorsStrip />
+
+      {/* Latest News — sits after Sponsors, matching the reference site's
+          homepage flow (their News section comes after the sponsor tiers). */}
+      <section className="px-6 py-16">
+        <div className="mx-auto max-w-6xl">
+          <div className="flex items-baseline justify-between">
+            <h3 className="font-serif text-2xl font-semibold">Latest news</h3>
+            <Link href="/news" className="text-sm font-semibold text-gold-dark hover:opacity-80">
+              View all →
+            </Link>
+          </div>
+          <div className="mt-6 grid gap-5 md:grid-cols-3">
+            {NEWS_ITEMS.slice(0, 3).map((n) => (
+              <Link
+                key={n.slug}
+                href="/news"
+                className="overflow-hidden rounded-md bg-paper-dark transition hover:bg-gold/10"
+              >
+                <div className="relative h-40 w-full">
+                  <Image src={n.photo} alt="" fill className="object-cover" sizes="(min-width: 768px) 33vw, 100vw" />
+                </div>
+                <div className="p-4">
+                  <div className="font-mono text-[11px] text-ink/50">{n.date}</div>
+                  <h4 className="mt-1.5 text-base font-semibold leading-snug">{n.title}</h4>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Gallery preview — sits near the bottom before the final CTA,
+          matching the reference site's homepage flow. */}
+      <section className="bg-paper-dark px-6 py-16">
+        <div className="mx-auto max-w-6xl">
+          <div className="flex items-baseline justify-between">
+            <h3 className="font-serif text-2xl font-semibold">Gallery</h3>
+            <Link href="/gallery" className="text-sm font-semibold text-gold-dark hover:opacity-80">
+              View all →
+            </Link>
+          </div>
+          <div className="mt-6 grid grid-cols-2 gap-4 md:grid-cols-4">
+            {GALLERY_PREVIEW.map((photo) => (
+              <Link key={photo} href="/gallery" className="relative aspect-square overflow-hidden rounded-md">
+                <Image
+                  src={photo}
+                  alt=""
+                  fill
+                  className="object-cover transition hover:scale-105"
+                  sizes="(min-width: 768px) 25vw, 50vw"
+                />
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
 
       {/* Final CTA */}
       <FinalCTA />

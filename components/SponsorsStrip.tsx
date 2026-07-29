@@ -3,12 +3,12 @@ import LogoMarquee from "./LogoMarquee";
 
 export default function SponsorsStrip() {
   return (
-    <section className="border-y-2 border-gold bg-ink px-6 py-14 text-paper">
+    <section className="border-y-2 border-gold bg-sponsor-bg px-6 py-14 text-paper">
       <div className="mx-auto max-w-6xl">
-        <div className="text-center font-mono text-xs uppercase tracking-wider text-gold">
+        <div className="text-glow text-center font-mono text-lg font-bold uppercase tracking-wider text-paper">
           Sponsors
         </div>
-        <h2 className="mt-2 text-center font-serif text-3xl font-semibold">
+        <h2 className="text-glow mt-2 text-center font-serif text-4xl font-bold text-paper">
           Backed by the industry
         </h2>
 
@@ -18,14 +18,15 @@ export default function SponsorsStrip() {
               rather than blending into a moving row like the others.
               PLACEHOLDER PHOTOS — swap for real sponsor logo files. */}
           <div>
-            <div className="mb-3 text-center text-sm font-semibold uppercase tracking-wider text-[#B9E4F5]">
+            <div className="text-glow mb-3 text-center text-lg font-bold uppercase tracking-wider text-paper">
               Diamond Sponsors
             </div>
             <div className="mx-auto flex max-w-3xl flex-wrap justify-center gap-5">
               {[1, 2].map((i) => (
                 <div
                   key={i}
-                  className="relative flex h-24 w-48 items-center justify-center overflow-hidden rounded-md border-2 border-[#B9E4F5] shadow-[0_0_20px_rgba(185,228,245,0.15)]"
+                  style={{ animationDelay: `${i * 0.15}s` }}
+                  className="animate-logo-in relative flex h-24 w-48 items-center justify-center overflow-hidden rounded-md border-2 border-[#B9E4F5] shadow-[0_0_20px_rgba(185,228,245,0.15)]"
                 >
                   <Image
                     src={`https://picsum.photos/seed/sponsor-diamond-${i}/400/220`}
@@ -47,21 +48,21 @@ export default function SponsorsStrip() {
               placeholder photos, like the reference site's rotating
               sponsor carousels. */}
           <div>
-            <div className="mb-3 text-center text-sm font-semibold uppercase tracking-wider text-[#E5E4E2]">
+            <div className="text-glow mb-3 text-center text-lg font-bold uppercase tracking-wider text-paper">
               Platinum Sponsors
             </div>
             <LogoMarquee count={6} tileBorder="border-[#E5E4E2]" seedPrefix="sponsor-platinum" size="md" />
           </div>
 
           <div>
-            <div className="mb-3 text-center text-sm font-semibold uppercase tracking-wider text-gold">
+            <div className="text-glow mb-3 text-center text-lg font-bold uppercase tracking-wider text-paper">
               Gold Sponsors
             </div>
             <LogoMarquee count={8} tileBorder="border-gold" seedPrefix="sponsor-gold" size="md" reverse />
           </div>
 
           <div>
-            <div className="mb-3 text-center text-sm font-semibold uppercase tracking-wider text-[#C0C0C0]">
+            <div className="text-glow mb-3 text-center text-lg font-bold uppercase tracking-wider text-paper">
               Silver Sponsors
             </div>
             <LogoMarquee count={8} tileBorder="border-[#C0C0C0]" seedPrefix="sponsor-silver" size="md" />
