@@ -23,16 +23,16 @@ function HeaderCountdown() {
   const time = useCountdown();
 
   return (
-    <div className="hidden items-center gap-2 sm:flex">
+    <div className="flex items-center gap-1.5 sm:gap-2">
       {(["days", "hours", "minutes", "seconds"] as const).map((unit) => (
         <div
           key={unit}
-          className="flex h-12 w-12 flex-col items-center justify-center rounded-sm border border-paper/60 bg-paper/20 shadow-sm"
+          className="flex h-9 w-9 flex-col items-center justify-center rounded-sm border border-paper/60 bg-paper/20 shadow-sm sm:h-12 sm:w-12"
         >
-          <span className="font-mono text-base font-bold text-paper tabular-nums">
+          <span className="font-mono text-xs font-bold text-paper tabular-nums sm:text-base">
             {time ? (unit === "days" ? time.days : pad(time[unit])) : "--"}
           </span>
-          <span className="text-[8px] uppercase tracking-wide text-paper/90">
+          <span className="text-[6px] uppercase tracking-wide text-paper/90 sm:text-[8px]">
             {unit === "days" ? "d" : unit === "hours" ? "h" : unit === "minutes" ? "m" : "s"}
           </span>
         </div>
@@ -58,45 +58,47 @@ export default function Header() {
           links live only in the slide-out panel below, at every screen
           size, matching the reference site's pattern rather than
           duplicating a separate desktop nav row here. */}
-      <div className="mx-auto flex max-w-6xl items-center gap-5 overflow-hidden px-4 py-3.5 sm:px-6">
-        <Link href="/" className="flex shrink-0 items-center gap-2.5" onClick={() => setOpen(false)}>
-          <Image src="/logo.png" alt="Somali HORECA" width={50} height={58} priority className="h-[58px] w-[50px]" />
-          <div className="hidden font-serif text-xl font-bold leading-none text-paper sm:block">
-            Somali HORECA
-          </div>
-        </Link>
+      <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-x-5 gap-y-2 px-4 py-3 sm:px-6">
+        <div className="flex shrink-0 items-center gap-3">
+          <Link href="/" className="flex shrink-0 items-center gap-2.5" onClick={() => setOpen(false)}>
+            <Image src="/logo.png" alt="Somali HORECA" width={50} height={58} priority className="h-[58px] w-[50px]" />
+            <div className="hidden font-serif text-xl font-bold leading-none text-paper sm:block">
+              Somali HORECA
+            </div>
+          </Link>
 
-        <div className="ml-2 hidden shrink-0 whitespace-nowrap rounded-sm bg-blue-dark px-4 py-2 leading-tight text-paper md:block">
-          <div className="font-mono text-xs font-bold text-paper">{EXPO_DATE_RANGE}</div>
-          <div className="text-[9px] text-paper/85">{EXPO_VENUE}</div>
+          <div className="shrink-0 whitespace-nowrap rounded-sm bg-blue-dark px-2.5 py-1.5 leading-tight text-paper sm:px-4 sm:py-2">
+            <div className="font-mono text-[10px] font-bold text-paper sm:text-xs">{EXPO_DATE_RANGE}</div>
+            <div className="text-[8px] text-paper/85 sm:text-[9px]">{EXPO_VENUE}</div>
+          </div>
         </div>
 
-        <div className="flex-1" />
+        <div className="flex shrink-0 items-center gap-2">
+          <HeaderCountdown />
 
-        <HeaderCountdown />
+          <Link
+            href="/expo"
+            className="shrink-0 whitespace-nowrap rounded-sm bg-red px-3 py-2 text-xs font-semibold text-paper hover:opacity-90 sm:px-4 sm:text-sm"
+          >
+            Register Now
+          </Link>
 
-        <Link
-          href="/expo"
-          className="ml-1 shrink-0 whitespace-nowrap rounded-sm bg-red px-4 py-2 text-sm font-semibold text-paper hover:opacity-90"
-        >
-          Register Now
-        </Link>
-
-        <button
-          type="button"
-          aria-label={open ? "Close menu" : "Open menu"}
-          aria-expanded={open}
-          onClick={() => setOpen((v) => !v)}
-          className="ml-1 flex h-9 w-9 shrink-0 flex-col items-center justify-center gap-1.5 rounded-sm border border-paper/35"
-        >
-          <span
-            className={`block h-[1.5px] w-4 bg-paper transition ${open ? "translate-y-[5.5px] rotate-45" : ""}`}
-          />
-          <span className={`block h-[1.5px] w-4 bg-paper transition ${open ? "opacity-0" : ""}`} />
-          <span
-            className={`block h-[1.5px] w-4 bg-paper transition ${open ? "-translate-y-[5.5px] -rotate-45" : ""}`}
-          />
-        </button>
+          <button
+            type="button"
+            aria-label={open ? "Close menu" : "Open menu"}
+            aria-expanded={open}
+            onClick={() => setOpen((v) => !v)}
+            className="flex h-9 w-9 shrink-0 flex-col items-center justify-center gap-1.5 rounded-sm border border-paper/35"
+          >
+            <span
+              className={`block h-[1.5px] w-4 bg-paper transition ${open ? "translate-y-[5.5px] rotate-45" : ""}`}
+            />
+            <span className={`block h-[1.5px] w-4 bg-paper transition ${open ? "opacity-0" : ""}`} />
+            <span
+              className={`block h-[1.5px] w-4 bg-paper transition ${open ? "-translate-y-[5.5px] -rotate-45" : ""}`}
+            />
+          </button>
+        </div>
       </div>
 
       {/* Slide-down panel — the ONLY place nav links live, at any screen size */}
