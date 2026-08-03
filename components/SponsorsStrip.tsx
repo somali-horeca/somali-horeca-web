@@ -1,9 +1,30 @@
 import Image from "next/image";
-import LogoMarquee from "./LogoMarquee";
+import RotatingLogoTile from "./RotatingLogoTile";
+
+// Each tier box now stays completely still — only the logo image inside
+// rotates every few seconds (2-3 placeholder logos per box). Swap the
+// seed numbers below for real sponsor logo files once available.
+const platinumTiles = [
+  { images: ["https://picsum.photos/seed/platinum-a1/400/220", "https://picsum.photos/seed/platinum-a2/400/220"] },
+  { images: ["https://picsum.photos/seed/platinum-b1/400/220", "https://picsum.photos/seed/platinum-b2/400/220"] },
+  { images: ["https://picsum.photos/seed/platinum-c1/400/220", "https://picsum.photos/seed/platinum-c2/400/220"] },
+];
+
+const goldTiles = [
+  { images: ["https://picsum.photos/seed/gold-a1/400/220", "https://picsum.photos/seed/gold-a2/400/220", "https://picsum.photos/seed/gold-a3/400/220"] },
+  { images: ["https://picsum.photos/seed/gold-b1/400/220", "https://picsum.photos/seed/gold-b2/400/220", "https://picsum.photos/seed/gold-b3/400/220"] },
+  { images: ["https://picsum.photos/seed/gold-c1/400/220", "https://picsum.photos/seed/gold-c2/400/220", "https://picsum.photos/seed/gold-c3/400/220"] },
+];
+
+const silverTiles = [
+  { images: ["https://picsum.photos/seed/silver-a1/400/220", "https://picsum.photos/seed/silver-a2/400/220"] },
+  { images: ["https://picsum.photos/seed/silver-b1/400/220", "https://picsum.photos/seed/silver-b2/400/220"] },
+  { images: ["https://picsum.photos/seed/silver-c1/400/220", "https://picsum.photos/seed/silver-c2/400/220"] },
+];
 
 export default function SponsorsStrip() {
   return (
-    <section className="border-y-2 border-gold bg-sponsor-bg px-6 py-14 text-paper">
+    <section className="border-y-2 border-gold bg-blue-dark px-6 py-14 text-paper">
       <div className="mx-auto max-w-6xl">
         <div className="text-glow text-center font-mono text-lg font-bold uppercase tracking-wider text-paper">
           Sponsors
@@ -13,10 +34,8 @@ export default function SponsorsStrip() {
         </h2>
 
         <div className="mt-10 space-y-10">
-          {/* Diamond: kept as a still showcase (not scrolling) since it's
-              the top tier — a shimmer sweep + sparkle mark it as special
-              rather than blending into a moving row like the others.
-              PLACEHOLDER PHOTOS — swap for real sponsor logo files. */}
+          {/* Diamond: top tier — a shimmer sweep + sparkle mark it as
+              special. PLACEHOLDER PHOTOS — swap for real sponsor logos. */}
           <div>
             <div className="text-glow mb-3 text-center text-lg font-bold uppercase tracking-wider text-paper">
               Diamond Sponsors
@@ -44,28 +63,55 @@ export default function SponsorsStrip() {
             </div>
           </div>
 
-          {/* Platinum, Gold, Silver: auto-scrolling logo marquees with real
-              placeholder photos, like the reference site's rotating
-              sponsor carousels. */}
+          {/* Platinum, Gold, Silver: fixed boxes (2-3 each) that stay in
+              place — only the logo inside each box rotates, matching the
+              reference site's actual behavior instead of a scrolling row. */}
           <div>
             <div className="text-glow mb-3 text-center text-lg font-bold uppercase tracking-wider text-paper">
               Platinum Sponsors
             </div>
-            <LogoMarquee count={6} tileBorder="border-[#E5E4E2]" seedPrefix="sponsor-platinum" size="md" />
+            <div className="mx-auto flex max-w-3xl flex-wrap justify-center gap-5">
+              {platinumTiles.map((tile, i) => (
+                <RotatingLogoTile
+                  key={i}
+                  images={tile.images}
+                  tileBorder="border-[#E5E4E2]"
+                  startDelayMs={i * 700}
+                />
+              ))}
+            </div>
           </div>
 
           <div>
             <div className="text-glow mb-3 text-center text-lg font-bold uppercase tracking-wider text-paper">
               Gold Sponsors
             </div>
-            <LogoMarquee count={8} tileBorder="border-gold" seedPrefix="sponsor-gold" size="md" reverse />
+            <div className="mx-auto flex max-w-3xl flex-wrap justify-center gap-5">
+              {goldTiles.map((tile, i) => (
+                <RotatingLogoTile
+                  key={i}
+                  images={tile.images}
+                  tileBorder="border-gold"
+                  startDelayMs={i * 700}
+                />
+              ))}
+            </div>
           </div>
 
           <div>
             <div className="text-glow mb-3 text-center text-lg font-bold uppercase tracking-wider text-paper">
               Silver Sponsors
             </div>
-            <LogoMarquee count={8} tileBorder="border-[#C0C0C0]" seedPrefix="sponsor-silver" size="md" />
+            <div className="mx-auto flex max-w-3xl flex-wrap justify-center gap-5">
+              {silverTiles.map((tile, i) => (
+                <RotatingLogoTile
+                  key={i}
+                  images={tile.images}
+                  tileBorder="border-[#C0C0C0]"
+                  startDelayMs={i * 700}
+                />
+              ))}
+            </div>
           </div>
         </div>
       </div>

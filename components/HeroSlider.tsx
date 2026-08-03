@@ -60,17 +60,15 @@ export default function HeroSlider() {
   const slide = SLIDES[active];
 
   return (
-    // aspect-[24/11] matches the reference site's own height formula
-    // (height = width × 880/1920, which simplifies to a 24:11 ratio) —
-    // done here with native CSS instead of their JS resize-handler, so it
-    // scales identically at any width without needing a resize listener.
-    // min-h keeps it from getting too cramped on very narrow phones;
-    // max-h keeps it from getting absurdly tall on huge/ultra-wide monitors.
+    // h-[80vh] targets roughly 80% of the visible screen height — tall
+    // enough to feel like a real banner, but not the full 100vh that was
+    // too tall before. min-h keeps it usable on short/landscape phones;
+    // max-h keeps it from getting absurd on huge monitors.
     // Tapping/clicking anywhere on the banner advances to the next slide,
     // same touch-friendly behavior as the reference site's carousel.
     <div
       onClick={advance}
-      className="relative aspect-[24/11] min-h-[200px] max-h-[820px] w-full cursor-pointer overflow-hidden"
+      className="relative h-[80vh] min-h-[320px] max-h-[750px] w-full cursor-pointer overflow-hidden"
     >
       <div key={fadeKey} className="absolute inset-0">
         <div className="absolute inset-0 animate-hero-fade">
@@ -84,10 +82,13 @@ export default function HeroSlider() {
           />
           {/* Dark gradient scrim so the caption stays readable over any photo */}
           <div className="absolute inset-0 bg-gradient-to-t from-ink/80 via-ink/20 to-transparent" />
+          {/* Brief brightness flash on each transition, like a light source
+              catching the new photo — makes the change feel more alive. */}
+          <div className="animate-hero-flash pointer-events-none absolute inset-0 bg-paper" />
         </div>
 
         <div className="absolute inset-x-0 bottom-8 animate-hero-caption px-5 sm:bottom-10 sm:px-9">
-          <h2 className="max-w-2xl font-serif text-xl font-bold leading-tight text-paper sm:text-2xl md:text-4xl">
+          <h2 className="max-w-2xl font-serif text-xl font-bold leading-tight text-paper drop-shadow-lg sm:text-2xl md:text-4xl">
             {slide.caption}
           </h2>
         </div>

@@ -1,8 +1,10 @@
 import { notFound } from "next/navigation";
 import Breadcrumbs from "@/components/Breadcrumbs";
-import { getCategory, getBusinessDB } from "@/lib/directory-data";
+import { getCategory, getBusiness } from "@/lib/directory-data";
 
-export const dynamic = "force-dynamic";
+// TEMPORARY: using local demo data (getBusiness) instead of the live
+// Supabase-backed getBusinessDB, since real business signups haven't been
+// collected yet. Swap back once real listings exist.
 
 const TIER_STYLE: Record<string, string> = {
   Basic: "bg-paper-dark text-ink/70",
@@ -17,7 +19,7 @@ export default async function BusinessPage({
 }) {
   const { category: categorySlug, business: businessSlug } = await params;
   const category = getCategory(categorySlug);
-  const business = await getBusinessDB(categorySlug, businessSlug);
+  const business = getBusiness(categorySlug, businessSlug);
   if (!category || !business) notFound();
 
   return (
@@ -97,7 +99,7 @@ export default async function BusinessPage({
             <div>
               <h2 className="font-serif text-xl font-semibold">Brochure</h2>
               {business.brochureUrl ? (
-                <a href={business.brochureUrl} className="mt-3 inline-block rounded-sm bg-ink px-5 py-2.5 text-sm font-semibold text-paper hover:opacity-90">
+                <a href={business.brochureUrl} className="mt-3 inline-block rounded-sm bg-red px-5 py-2.5 text-sm font-semibold text-paper hover:opacity-90">
                   Download PDF
                 </a>
               ) : (
@@ -112,7 +114,7 @@ export default async function BusinessPage({
               <input type="text" placeholder="Your name" className="rounded-sm border border-ink/15 bg-paper px-4 py-2.5 text-sm" />
               <input type="text" placeholder="Your business" className="rounded-sm border border-ink/15 bg-paper px-4 py-2.5 text-sm" />
               <textarea placeholder="What are you looking for?" className="min-h-24 rounded-sm border border-ink/15 bg-paper px-4 py-2.5 text-sm" />
-              <button type="submit" className="rounded-sm bg-gold px-5 py-2.5 text-sm font-semibold text-ink hover:opacity-90">
+              <button type="submit" className="rounded-sm bg-red px-5 py-2.5 text-sm font-semibold text-paper hover:opacity-90">
                 Send Inquiry
               </button>
               <p className="text-xs text-ink/50">

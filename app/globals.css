@@ -79,6 +79,24 @@ body {
   animation: hero-caption-in 0.7s ease-out 0.15s both;
 }
 
+/* Brief brightness flash on hero transitions, like a light source
+   catching the new photo — makes each slide change feel more alive. */
+@keyframes hero-flash {
+  0% {
+    opacity: 0;
+  }
+  12% {
+    opacity: 0.35;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.animate-hero-flash {
+  animation: hero-flash 0.8s ease-out;
+}
+
 /* Slow diagonal shimmer sweep used on Diamond sponsor slots, to mark that
    tier as visually "premium" even while logos are still placeholders. */
 @keyframes diamond-shimmer {

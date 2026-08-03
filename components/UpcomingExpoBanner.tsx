@@ -8,13 +8,13 @@ export default function UpcomingExpoBanner() {
         14–16 March 2027 · Mogadishu Convention Centre
       </p>
       <div className="mt-4 flex flex-wrap gap-2">
-        <Link href="/expo" className="rounded-sm bg-gold px-4 py-2 text-xs font-semibold text-ink hover:opacity-90">
+        <Link href="/expo" className="rounded-sm bg-red px-4 py-2 text-xs font-semibold text-paper hover:opacity-90">
           Register
         </Link>
-        <Link href="/expo/exhibitor-registration" className="rounded-sm border border-paper/40 px-4 py-2 text-xs font-semibold hover:bg-paper/10">
+        <Link href="/expo/exhibitor-registration" className="rounded-sm bg-red px-4 py-2 text-xs font-semibold text-paper hover:opacity-90">
           Become exhibitor
         </Link>
-        <Link href="/expo/sponsorship" className="rounded-sm border border-paper/40 px-4 py-2 text-xs font-semibold hover:bg-paper/10">
+        <Link href="/expo/sponsorship" className="rounded-sm bg-red px-4 py-2 text-xs font-semibold text-paper hover:opacity-90">
           Sponsor expo
         </Link>
       </div>

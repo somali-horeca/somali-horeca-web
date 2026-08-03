@@ -3,10 +3,10 @@ import Image from "next/image";
 
 export default function PlatformIntro() {
   return (
-    <section className="bg-coffee px-6 py-16 text-paper">
+    <section className="bg-blue-dark px-6 py-16 text-paper">
       <div className="mx-auto grid max-w-6xl items-center gap-10 md:grid-cols-2">
         <div>
-          <h2 className="font-serif text-3xl font-bold text-blue-tint md:text-4xl">
+          <h2 className="font-serif text-3xl font-bold text-gold md:text-4xl">
             About Somali HORECA
           </h2>
           <p className="mt-2 max-w-xl text-lg font-medium text-paper/90">
@@ -20,7 +20,7 @@ export default function PlatformIntro() {
           </p>
           <Link
             href="/about"
-            className="mt-6 inline-block rounded-sm border border-paper/40 px-5 py-2.5 text-base font-semibold text-paper hover:bg-paper/10"
+            className="mt-6 inline-block rounded-sm bg-red px-5 py-2.5 text-base font-semibold text-paper hover:opacity-90"
           >
             Read More
           </Link>

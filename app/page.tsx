@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import HeroSlider from "@/components/HeroSlider";
 import PlatformIntro from "@/components/PlatformIntro";
+import StrategicPartners from "@/components/StrategicPartners";
 import FeaturedBusinesses from "@/components/FeaturedBusinesses";
 import UpcomingExpoBanner from "@/components/UpcomingExpoBanner";
 import SponsorsStrip from "@/components/SponsorsStrip";
@@ -22,6 +23,8 @@ export default function Home() {
 
       {/* "Somali HORECA" platform explainer */}
       <PlatformIntro />
+
+      <StrategicPartners />
 
       <section className="bg-blue-tint px-6 py-16">
         <div className="mx-auto max-w-6xl">

@@ -53,7 +53,7 @@ export default function Header() {
   }, [open]);
 
   return (
-    <header className="sticky top-0 z-50 border-b-2 border-gold bg-header">
+    <header className="sticky top-0 z-50 border-b-2 border-gold bg-blue-dark">
       {/* Single-line bar: logo, dates, countdown, Register, menu — nav
           links live only in the slide-out panel below, at every screen
           size, matching the reference site's pattern rather than
@@ -67,9 +67,9 @@ export default function Header() {
             </div>
           </Link>
 
-          <div className="shrink-0 whitespace-nowrap rounded-sm bg-blue-dark px-2.5 py-1.5 leading-tight text-paper sm:px-4 sm:py-2">
-            <div className="font-mono text-[10px] font-bold text-paper sm:text-xs">{EXPO_DATE_RANGE}</div>
-            <div className="text-[8px] text-paper/85 sm:text-[9px]">{EXPO_VENUE}</div>
+          <div className="shrink-0 whitespace-nowrap rounded-sm border border-paper/30 bg-blue-dark px-2.5 py-1.5 leading-tight text-paper sm:px-4 sm:py-2">
+            <div className="text-glow font-mono text-[10px] font-bold text-paper sm:text-xs">{EXPO_DATE_RANGE}</div>
+            <div className="text-glow text-[8px] text-paper/90 sm:text-[9px]">{EXPO_VENUE}</div>
           </div>
         </div>
 
@@ -103,11 +103,11 @@ export default function Header() {
 
       {/* Slide-down panel — the ONLY place nav links live, at any screen size */}
       <div
-        className={`overflow-hidden border-t border-paper/15 bg-ink transition-[max-height] duration-300 ease-in-out ${
+        className={`overflow-hidden border-t border-paper/15 bg-blue-dark transition-[max-height] duration-300 ease-in-out ${
           open ? "max-h-[28rem]" : "max-h-0 border-t-0"
         }`}
       >
-        <nav className="mx-auto flex max-w-6xl flex-col divide-y divide-paper/10 px-6">
+        <nav className="flex flex-col divide-y divide-paper/10 px-6">
           {NAV_LINKS.map((link) => (
             <Link
               key={link.href}

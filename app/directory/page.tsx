@@ -1,12 +1,17 @@
 import Link from "next/link";
 import Breadcrumbs from "@/components/Breadcrumbs";
-import DirectorySearch from "@/components/DirectorySearch";
-import { CATEGORIES, CATEGORY_GROUPS, getAllApprovedBusinessesDB } from "@/lib/directory-data";
+import { BUSINESSES, CATEGORIES, FEATURED_CATEGORY_SLUGS } from "@/lib/directory-data";
 
-export const dynamic = "force-dynamic";
+// TEMPORARY: using local demo data (BUSINESSES from lib/directory-data.ts)
+// instead of the live Supabase-backed data, since real business signups
+// haven't been collected yet. Once real listings exist, swap this back to
+// getAllApprovedBusinessesDB() from lib/directory-data.ts.
 
-export default async function Directory() {
-  const businesses = await getAllApprovedBusinessesDB();
+export default function Directory() {
+  const businesses = BUSINESSES;
+  const featuredCategories = FEATURED_CATEGORY_SLUGS.map((slug) =>
+    CATEGORIES.find((c) => c.slug === slug)
+  ).filter((c): c is NonNullable<typeof c> => Boolean(c));
 
   return (
     <>
@@ -20,35 +25,34 @@ export default async function Directory() {
           <h1 className="font-serif text-3xl font-bold md:text-4xl">Business Directory</h1>
           <p className="mt-4 max-w-2xl text-ink/70">
             Somalia&apos;s verified hospitality directory, connecting hotels, restaurants,
-            suppliers, professional services, and investment partners in one place.
+            suppliers, professional services, and investment partners in one place. Tap a
+            category below to see the businesses listed there.
           </p>
 
-          <div className="mt-10">
-            <DirectorySearch businesses={businesses} />
+          <div className="mt-10 grid gap-4 sm:grid-cols-2 md:grid-cols-5">
+            {featuredCategories.map((cat) => (
+              <Link
+                key={cat.slug}
+                href={`/directory/${cat.slug}`}
+                className="rounded-md bg-paper-dark p-5 transition hover:-translate-y-0.5 hover:bg-gold/10"
+              >
+                <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-full bg-red font-mono text-[11px] font-bold text-paper">
+                  {cat.code}
+                </div>
+                <h3 className="font-semibold leading-snug">{cat.name}</h3>
+                <div className="mt-1.5 font-mono text-xs text-ink/50">
+                  {businesses.filter((b) => b.categorySlug === cat.slug).length} listed
+                </div>
+              </Link>
+            ))}
           </div>
 
-          {CATEGORY_GROUPS.map((group) => (
-            <div key={group} className="mt-12">
-              <h2 className="mb-4 font-serif text-xl font-semibold">{group}</h2>
-              <div className="grid gap-4 md:grid-cols-4">
-                {CATEGORIES.filter((c) => c.group === group).map((cat) => (
-                  <Link
-                    key={cat.slug}
-                    href={`/directory/${cat.slug}`}
-                    className="rounded-md border border-ink/15 bg-paper-dark p-6 transition hover:-translate-y-0.5 hover:border-gold"
-                  >
-                    <div className="mb-3 flex h-9 w-9 items-center justify-center rounded-full border-2 border-gold font-mono text-[10px] font-bold text-gold">
-                      {cat.code}
-                    </div>
-                    <h3 className="font-semibold">{cat.name}</h3>
-                    <div className="mt-1 font-mono text-xs text-ink/50">
-                      {businesses.filter((b) => b.categorySlug === cat.slug).length} listed
-                    </div>
-                  </Link>
-                ))}
-              </div>
-            </div>
-          ))}
+          <div className="mt-6 text-sm text-ink/60">
+            Looking for something else? Browse{" "}
+            <Link href="/directory/all-categories" className="font-semibold text-gold-dark hover:opacity-80">
+              all 27 categories →
+            </Link>
+          </div>
         </div>
       </section>
     </>

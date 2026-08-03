@@ -1,9 +1,11 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import Breadcrumbs from "@/components/Breadcrumbs";
-import { getCategory, getBusinessesInCategoryDB } from "@/lib/directory-data";
+import { getCategory, getBusinessesInCategory } from "@/lib/directory-data";
 
-export const dynamic = "force-dynamic";
+// TEMPORARY: using local demo data (getBusinessesInCategory) instead of the
+// live Supabase-backed getBusinessesInCategoryDB, since real business
+// signups haven't been collected yet. Swap back once real listings exist.
 
 export default async function CategoryPage({
   params,
@@ -14,7 +16,7 @@ export default async function CategoryPage({
   const category = getCategory(categorySlug);
   if (!category) notFound();
 
-  const businesses = await getBusinessesInCategoryDB(categorySlug);
+  const businesses = getBusinessesInCategory(categorySlug);
 
   return (
     <>
@@ -35,7 +37,7 @@ export default async function CategoryPage({
           <p className="mt-3 text-ink/70">{businesses.length} listed</p>
 
           {category.subCategories && (
-            <div className="mt-5 rounded-md border border-ink/15 bg-paper-dark p-5">
+            <div className="mt-5 rounded-md bg-paper-dark p-5">
               <div className="mb-2 font-mono text-xs uppercase tracking-wider text-blue-dark">
                 Includes
               </div>
@@ -53,7 +55,7 @@ export default async function CategoryPage({
           )}
 
           {businesses.length === 0 ? (
-            <div className="mt-10 rounded-md border border-dashed border-ink/25 bg-paper-dark p-8 text-center text-ink/60">
+            <div className="mt-10 rounded-md bg-paper-dark p-8 text-center text-ink/60">
               No businesses listed yet in this category.
             </div>
           ) : (
@@ -62,7 +64,7 @@ export default async function CategoryPage({
                 <Link
                   key={b.slug}
                   href={`/directory/${categorySlug}/${b.slug}`}
-                  className="rounded-md border border-ink/15 bg-paper p-6 transition hover:-translate-y-0.5 hover:border-gold"
+                  className="rounded-md bg-paper-dark p-6 transition hover:-translate-y-0.5 hover:bg-gold/10"
                 >
                   <div className="mb-3 inline-block rounded-sm bg-gold px-2 py-1 font-mono text-[10px] font-bold uppercase text-ink">
                     {b.membershipTier}

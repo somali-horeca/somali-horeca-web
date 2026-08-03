@@ -17,6 +17,23 @@ export const CATEGORY_GROUPS = [
   "Strategy, Training & Sector Development",
 ] as const;
 
+// The categories featured on the main Directory page (top 10). The rest are
+// still fully reachable via their own URLs and via the About/subcategory
+// pages — just not shown in this front grid, to keep it from feeling
+// overwhelming with all 27 categories at once.
+export const FEATURED_CATEGORY_SLUGS = [
+  "hotels-guest-houses",
+  "restaurants-local-eateries",
+  "cafes-tea-lounges",
+  "caterers-event-food",
+  "bakeries-confectioneries",
+  "food-fresh-produce-suppliers",
+  "beverage-flavor-suppliers",
+  "commercial-kitchen-equipment",
+  "hospitality-furniture-fitout",
+  "hospitality-technology",
+] as const;
+
 export const CATEGORIES: Category[] = [
   { slug: "hotels-guest-houses", name: "Hotels and Guest Houses", code: "HTL", count: 0, group: "Core Hospitality Operations" },
   { slug: "restaurants-local-eateries", name: "Restaurants and Local Eateries", code: "RST", count: 0, group: "Core Hospitality Operations" },
@@ -150,6 +167,84 @@ export const BUSINESSES: Business[] = [
     productsAndServices: ["Rooms & suites", "Conference facilities", "Restaurant & catering"],
     contact: { phone: "+252 XX XXX XXXX", email: "reservations@example.com" },
     location: "Hargeisa",
+    membershipTier: "Basic",
+  },
+  // PLACEHOLDER/DEMO — swap for real business submissions once available.
+  {
+    slug: "baraka-restaurant-mogadishu",
+    categorySlug: "restaurants-local-eateries",
+    name: "Baraka Restaurant",
+    overview: "A family-run restaurant serving traditional Somali dishes alongside grilled seafood and pasta.",
+    logoInitials: "BR",
+    productsAndServices: ["Traditional Somali cuisine", "Fresh seafood", "Private dining"],
+    contact: { phone: "+252 XX XXX XXXX", email: "hello@example.com" },
+    location: "Mogadishu",
+    membershipTier: "Verified",
+  },
+  {
+    slug: "liido-tea-lounge",
+    categorySlug: "cafes-tea-lounges",
+    name: "Liido Tea Lounge",
+    overview: "A beachside café known for spiced Somali tea, fresh juices, and light breakfast plates.",
+    logoInitials: "LT",
+    productsAndServices: ["Spiced tea service", "Fresh juices", "Breakfast menu"],
+    contact: { phone: "+252 XX XXX XXXX", email: "info@example.com" },
+    location: "Mogadishu",
+    membershipTier: "Basic",
+  },
+  {
+    slug: "golden-events-catering",
+    categorySlug: "caterers-event-food",
+    name: "Golden Events Catering",
+    overview: "Full-service event catering for weddings, corporate functions, and large gatherings.",
+    logoInitials: "GE",
+    productsAndServices: ["Wedding catering", "Corporate event catering", "Buffet & plated service"],
+    contact: { phone: "+252 XX XXX XXXX", email: "bookings@example.com" },
+    location: "Mogadishu",
+    membershipTier: "Verified",
+  },
+  {
+    slug: "sweet-hargeisa-bakery",
+    categorySlug: "bakeries-confectioneries",
+    name: "Sweet Hargeisa Bakery",
+    overview: "Custom cakes, pastries, and daily bread supply for hotels and cafés across the region.",
+    logoInitials: "SH",
+    productsAndServices: ["Custom cakes", "Daily pastries", "Wholesale bread supply"],
+    contact: { phone: "+252 XX XXX XXXX", email: "orders@example.com" },
+    location: "Hargeisa",
+    membershipTier: "Basic",
+  },
+  {
+    slug: "somali-fresh-produce-co",
+    categorySlug: "food-fresh-produce-suppliers",
+    name: "Somali Fresh Produce Co.",
+    overview: "Daily wholesale delivery of fresh fruit, vegetables, and dairy to hotels and restaurants.",
+    logoInitials: "SF",
+    productsAndServices: ["Fresh fruit & vegetables", "Dairy products", "Daily wholesale delivery"],
+    contact: { phone: "+252 XX XXX XXXX", email: "supply@example.com" },
+    location: "Mogadishu",
+    membershipTier: "Featured",
+  },
+  {
+    slug: "kitchen-pro-equipment",
+    categorySlug: "commercial-kitchen-equipment",
+    name: "Kitchen Pro Equipment",
+    overview: "Commercial ovens, refrigeration, and espresso equipment for hotels, cafés, and restaurants.",
+    logoInitials: "KP",
+    productsAndServices: ["Commercial ovens", "Refrigeration units", "Espresso machines"],
+    contact: { phone: "+252 XX XXX XXXX", email: "sales@example.com" },
+    location: "Mogadishu",
+    membershipTier: "Verified",
+  },
+  {
+    slug: "horeca-tech-solutions",
+    categorySlug: "hospitality-technology",
+    name: "HORECA Tech Solutions",
+    overview: "Point-of-sale systems and booking software built for hotels and restaurants in Somalia.",
+    logoInitials: "HT",
+    productsAndServices: ["POS systems", "Booking software", "Staff training & support"],
+    contact: { phone: "+252 XX XXX XXXX", email: "support@example.com" },
+    location: "Mogadishu",
     membershipTier: "Basic",
   },
 ];
