@@ -41,6 +41,23 @@ function HeaderCountdown() {
   );
 }
 
+// Compact single-line version for the tight mobile header row — same live
+// countdown, just days+hours in one small pill instead of 4 separate boxes.
+function HeaderCountdownCompact() {
+  const time = useCountdown();
+
+  return (
+    <div className="flex shrink-0 flex-col items-center justify-center rounded-sm border border-paper/60 bg-paper/20 px-1.5 py-1 leading-none shadow-sm">
+      <span className="font-mono text-[11px] font-bold text-paper tabular-nums">
+        {time ? `${time.days}d ${pad(time.hours)}h` : "--"}
+      </span>
+      <span className="mt-0.5 font-mono text-[9px] font-bold text-paper tabular-nums">
+        {time ? `${pad(time.minutes)}m ${pad(time.seconds)}s` : "--"}
+      </span>
+    </div>
+  );
+}
+
 export default function Header() {
   const [open, setOpen] = useState(false);
 
@@ -73,7 +90,10 @@ export default function Header() {
           </div>
         </div>
 
-        <div className="flex shrink-0 items-center gap-2">
+        <div className="flex shrink-0 items-center gap-1.5 sm:gap-2">
+          <div className="sm:hidden">
+            <HeaderCountdownCompact />
+          </div>
           <div className="hidden sm:block">
             <HeaderCountdown />
           </div>
@@ -110,12 +130,9 @@ export default function Header() {
         }`}
       >
         <nav className="flex flex-col divide-y divide-paper/10 px-6">
-          <div className="flex items-center justify-between gap-3 py-3.5 sm:hidden">
-            <div>
-              <div className="font-mono text-xs font-bold text-paper">{EXPO_DATE_RANGE}</div>
-              <div className="text-[10px] text-paper/70">{EXPO_VENUE}</div>
-            </div>
-            <HeaderCountdown />
+          <div className="py-3.5 sm:hidden">
+            <div className="font-mono text-xs font-bold text-paper">{EXPO_DATE_RANGE}</div>
+            <div className="text-[10px] text-paper/70">{EXPO_VENUE}</div>
           </div>
           {NAV_LINKS.map((link) => (
             <Link

@@ -1,10 +1,19 @@
 import Link from "next/link";
-import Image from "next/image";
+import RotatingLogoTile from "./RotatingLogoTile";
+
+// PLACEHOLDER PHOTOS from Lorem Picsum — swap for real event/venue photos.
+// The box itself stays fixed in place; only the photo inside crossfades,
+// same pattern used for the sponsor logo tiles.
+const ABOUT_PHOTOS = [
+  "https://picsum.photos/seed/horeca-about/900/600",
+  "https://picsum.photos/seed/horeca-about-2/900/600",
+  "https://picsum.photos/seed/horeca-about-3/900/600",
+];
 
 export default function PlatformIntro() {
   return (
-    <section className="bg-blue-dark px-6 py-16 text-paper">
-      <div className="mx-auto grid max-w-[1400px] items-center gap-10 px-2 md:grid-cols-2">
+    <section className="bg-blue-dark px-4 py-12 text-paper sm:px-6">
+      <div className="mx-auto grid max-w-[1400px] items-center gap-8 md:grid-cols-2">
         <div>
           <h2 className="font-serif text-3xl font-bold text-gold md:text-4xl">
             About Somali HORECA
@@ -26,16 +35,13 @@ export default function PlatformIntro() {
           </Link>
         </div>
 
-        {/* PLACEHOLDER PHOTO from Lorem Picsum — swap for a real event/venue photo */}
-        <div className="relative h-56 w-full overflow-hidden rounded-md border border-gold/25 md:h-72">
-          <Image
-            src="https://picsum.photos/seed/horeca-about/900/600"
-            alt=""
-            fill
-            className="object-cover"
-            sizes="(min-width: 768px) 50vw, 100vw"
-          />
-        </div>
+        {/* Rotating slideshow — box stays fixed, photo inside crossfades */}
+        <RotatingLogoTile
+          images={ABOUT_PHOTOS}
+          tileBorder="border-gold/25"
+          size="h-56 w-full md:h-72"
+          intervalMs={4000}
+        />
       </div>
     </section>
   );
