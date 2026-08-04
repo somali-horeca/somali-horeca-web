@@ -27,12 +27,12 @@ const SOCIAL_LINKS = [
 export default function Footer() {
   return (
     <footer className="border-t-2 border-gold bg-blue-dark text-paper">
-      <div className="mx-auto max-w-[1400px] px-6 py-10">
-        <div className="grid grid-cols-2 gap-x-6 gap-y-8 md:grid-cols-4">
+      <div className="mx-auto max-w-[1400px] px-6 py-8">
+        <div className="grid grid-cols-2 gap-x-6 gap-y-6 md:grid-cols-4">
           <div className="col-span-2 md:col-span-1">
             <Image src="/logo.png" alt="Somali HORECA" width={32} height={38} className="h-[38px] w-[32px]" />
             <div className="mt-3 font-serif text-lg font-bold text-paper">Somali HORECA</div>
-            <p className="mt-2 text-base text-paper/70">
+            <p className="mt-2 text-sm text-paper/70">
               The digital infrastructure of Somalia&apos;s hospitality economy.
             </p>
 
@@ -55,10 +55,10 @@ export default function Footer() {
           </div>
 
           <div>
-            <div className="mb-3 font-mono text-sm uppercase tracking-wider text-gold">
+            <div className="mb-2.5 font-mono text-xs uppercase tracking-wider text-gold">
               Quick Links
             </div>
-            <ul className="space-y-2.5 text-base">
+            <ul className="space-y-2 text-sm">
               <li><Link href="/about" className="text-paper/75 hover:text-paper">About</Link></li>
               <li><Link href="/directory" className="text-paper/75 hover:text-paper">Directory</Link></li>
               <li><Link href="/expo" className="text-paper/75 hover:text-paper">Expo</Link></li>
@@ -67,8 +67,8 @@ export default function Footer() {
           </div>
 
           <div>
-            <div className="mb-3 font-mono text-sm uppercase tracking-wider text-gold">Legal</div>
-            <ul className="space-y-2.5 text-base">
+            <div className="mb-2.5 font-mono text-xs uppercase tracking-wider text-gold">Legal</div>
+            <ul className="space-y-2 text-sm">
               <li><Link href="/legal/privacy" className="text-paper/75 hover:text-paper">Privacy Policy</Link></li>
               <li><Link href="/legal/terms" className="text-paper/75 hover:text-paper">Terms of Service</Link></li>
               <li><Link href="/legal/cookies" className="text-paper/75 hover:text-paper">Cookie Policy</Link></li>
@@ -77,8 +77,8 @@ export default function Footer() {
           </div>
 
           <div>
-            <div className="mb-3 font-mono text-sm uppercase tracking-wider text-gold">Contact</div>
-            <ul className="space-y-2.5 text-base">
+            <div className="mb-2.5 font-mono text-xs uppercase tracking-wider text-gold">Contact</div>
+            <ul className="space-y-2 text-sm">
               <li className="text-paper/75">info@somalihoreca.com</li>
               <li className="text-paper/75">Mogadishu, Somalia</li>
               <li><Link href="/contact" className="text-paper/75 hover:text-paper">Contact Form →</Link></li>
@@ -86,7 +86,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-8 border-t border-paper/15 pt-5 text-center text-sm text-paper/50">
+        <div className="mt-6 border-t border-paper/15 pt-4 text-center text-xs text-paper/50">
           © {new Date().getFullYear()} Somali HORECA. All rights reserved.
         </div>
       </div>

@@ -58,7 +58,7 @@ export default function Header() {
           links live only in the slide-out panel below, at every screen
           size, matching the reference site's pattern rather than
           duplicating a separate desktop nav row here. */}
-      <div className="mx-auto flex max-w-[1400px] flex-wrap items-center justify-between gap-x-5 gap-y-2 px-4 py-3 sm:px-6">
+      <div className="mx-auto flex max-w-[1400px] flex-nowrap items-center justify-between gap-x-3 px-4 py-3 sm:gap-x-5 sm:px-6">
         <div className="flex shrink-0 items-center gap-3">
           <Link href="/" className="flex shrink-0 items-center gap-2.5" onClick={() => setOpen(false)}>
             <Image src="/logo.png" alt="Somali HORECA" width={50} height={58} priority className="h-[58px] w-[50px]" />
@@ -67,14 +67,16 @@ export default function Header() {
             </div>
           </Link>
 
-          <div className="shrink-0 whitespace-nowrap rounded-sm border border-paper/30 bg-blue-dark px-2.5 py-1.5 leading-tight text-paper sm:px-4 sm:py-2">
+          <div className="hidden shrink-0 whitespace-nowrap rounded-sm border border-paper/30 bg-blue-dark px-2.5 py-1.5 leading-tight text-paper sm:block sm:px-4 sm:py-2">
             <div className="font-mono text-[10px] font-bold text-paper sm:text-xs">{EXPO_DATE_RANGE}</div>
             <div className="text-[8px] text-paper/90 sm:text-[9px]">{EXPO_VENUE}</div>
           </div>
         </div>
 
         <div className="flex shrink-0 items-center gap-2">
-          <HeaderCountdown />
+          <div className="hidden sm:block">
+            <HeaderCountdown />
+          </div>
 
           <Link
             href="/expo"
@@ -108,6 +110,13 @@ export default function Header() {
         }`}
       >
         <nav className="flex flex-col divide-y divide-paper/10 px-6">
+          <div className="flex items-center justify-between gap-3 py-3.5 sm:hidden">
+            <div>
+              <div className="font-mono text-xs font-bold text-paper">{EXPO_DATE_RANGE}</div>
+              <div className="text-[10px] text-paper/70">{EXPO_VENUE}</div>
+            </div>
+            <HeaderCountdown />
+          </div>
           {NAV_LINKS.map((link) => (
             <Link
               key={link.href}
