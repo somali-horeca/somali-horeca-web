@@ -47,11 +47,11 @@ function HeaderCountdownCompact() {
   const time = useCountdown();
 
   return (
-    <div className="flex shrink-0 flex-col items-center justify-center rounded-sm border border-paper/60 bg-paper/20 px-1.5 py-1 leading-none shadow-sm">
-      <span className="font-mono text-[11px] font-bold text-paper tabular-nums">
+    <div className="flex shrink-0 flex-col items-center justify-center rounded-sm border border-paper/60 bg-paper/20 px-2.5 py-1.5 leading-none shadow-sm">
+      <span className="font-mono text-sm font-bold text-paper tabular-nums">
         {time ? `${time.days}d ${pad(time.hours)}h` : "--"}
       </span>
-      <span className="mt-0.5 font-mono text-[9px] font-bold text-paper tabular-nums">
+      <span className="mt-1 font-mono text-[11px] font-bold text-paper tabular-nums">
         {time ? `${pad(time.minutes)}m ${pad(time.seconds)}s` : "--"}
       </span>
     </div>
