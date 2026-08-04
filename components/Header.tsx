@@ -23,37 +23,20 @@ function HeaderCountdown() {
   const time = useCountdown();
 
   return (
-    <div className="flex items-center gap-1.5 sm:gap-2">
+    <div className="flex items-center gap-1 sm:gap-2">
       {(["days", "hours", "minutes", "seconds"] as const).map((unit) => (
         <div
           key={unit}
-          className="flex h-9 w-9 flex-col items-center justify-center rounded-sm border border-paper/60 bg-paper/20 shadow-sm sm:h-12 sm:w-12"
+          className="flex h-7 w-7 flex-col items-center justify-center rounded-sm border border-paper/60 bg-paper/20 shadow-sm sm:h-12 sm:w-12"
         >
-          <span className="font-mono text-xs font-bold text-paper tabular-nums sm:text-base">
+          <span className="font-mono text-[10px] font-bold text-paper tabular-nums sm:text-base">
             {time ? (unit === "days" ? time.days : pad(time[unit])) : "--"}
           </span>
-          <span className="text-[6px] uppercase tracking-wide text-paper/90 sm:text-[8px]">
+          <span className="text-[5px] uppercase tracking-wide text-paper/90 sm:text-[8px]">
             {unit === "days" ? "d" : unit === "hours" ? "h" : unit === "minutes" ? "m" : "s"}
           </span>
         </div>
       ))}
-    </div>
-  );
-}
-
-// Compact single-line version for the tight mobile header row — same live
-// countdown, just days+hours in one small pill instead of 4 separate boxes.
-function HeaderCountdownCompact() {
-  const time = useCountdown();
-
-  return (
-    <div className="flex shrink-0 flex-col items-center justify-center rounded-sm border border-paper/60 bg-paper/20 px-2.5 py-1.5 leading-none shadow-sm">
-      <span className="font-mono text-sm font-bold text-paper tabular-nums">
-        {time ? `${time.days}d ${pad(time.hours)}h` : "--"}
-      </span>
-      <span className="mt-1 font-mono text-[11px] font-bold text-paper tabular-nums">
-        {time ? `${pad(time.minutes)}m ${pad(time.seconds)}s` : "--"}
-      </span>
     </div>
   );
 }
@@ -75,7 +58,7 @@ export default function Header() {
           links live only in the slide-out panel below, at every screen
           size, matching the reference site's pattern rather than
           duplicating a separate desktop nav row here. */}
-      <div className="mx-auto flex max-w-[1400px] flex-nowrap items-center justify-between gap-x-3 px-4 py-3 sm:gap-x-5 sm:px-6">
+      <div className="mx-auto flex max-w-[1400px] flex-nowrap items-center justify-between gap-x-2 px-3 py-3 sm:gap-x-5 sm:px-6">
         <div className="flex shrink-0 items-center gap-3">
           <Link href="/" className="flex shrink-0 items-center gap-2.5" onClick={() => setOpen(false)}>
             <Image src="/logo.png" alt="Somali HORECA" width={50} height={58} priority className="h-[58px] w-[50px]" />
@@ -91,12 +74,7 @@ export default function Header() {
         </div>
 
         <div className="flex shrink-0 items-center gap-1.5 sm:gap-2">
-          <div className="sm:hidden">
-            <HeaderCountdownCompact />
-          </div>
-          <div className="hidden sm:block">
-            <HeaderCountdown />
-          </div>
+          <HeaderCountdown />
 
           <Link
             href="/expo"
