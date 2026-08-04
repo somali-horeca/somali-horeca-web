@@ -68,7 +68,7 @@ export default function HeroSlider() {
     // same touch-friendly behavior as the reference site's carousel.
     <div
       onClick={advance}
-      className="relative h-[80vh] min-h-[320px] max-h-[750px] w-full cursor-pointer overflow-hidden"
+      className="relative h-[80vh] min-h-[320px] max-h-[750px] w-full cursor-pointer overflow-hidden bg-ink"
     >
       <div key={fadeKey} className="absolute inset-0">
         <div className="absolute inset-0 animate-hero-fade">
@@ -83,8 +83,11 @@ export default function HeroSlider() {
           {/* Dark gradient scrim so the caption stays readable over any photo */}
           <div className="absolute inset-0 bg-gradient-to-t from-ink/80 via-ink/20 to-transparent" />
           {/* Brief brightness flash on each transition, like a light source
-              catching the new photo — makes the change feel more alive. */}
-          <div className="animate-hero-flash pointer-events-none absolute inset-0 bg-paper" />
+              catching the new photo — makes the change feel more alive.
+              opacity-0 is the resting state, guaranteeing it can never sit
+              permanently opaque and hide the photo even if the keyframe
+              animation fails to apply for any reason. */}
+          <div className="animate-hero-flash pointer-events-none absolute inset-0 bg-paper opacity-0" />
         </div>
 
         <div className="absolute inset-x-0 bottom-8 animate-hero-caption px-5 sm:bottom-10 sm:px-9">

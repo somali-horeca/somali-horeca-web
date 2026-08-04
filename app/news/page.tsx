@@ -8,7 +8,7 @@ export default function NewsPage() {
       <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "News" }]} />
 
       <section className="px-6 py-16">
-        <div className="mx-auto max-w-6xl">
+        <div className="mx-auto max-w-[1400px]">
           <div className="font-mono text-xs text-gold-dark">Somali HORECA</div>
           <h1 className="mt-2 font-serif text-3xl font-bold md:text-4xl">News</h1>
           <p className="mt-3 max-w-2xl text-base text-ink/70">

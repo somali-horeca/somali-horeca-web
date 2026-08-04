@@ -3,16 +3,15 @@
 :root {
   --color-ink: #1c140f;
   --color-paper: #f0efeb;
-  --color-paper-dark: #f0efeb;
-  --color-red: #e2554c;
-  --color-red-dark: #b8362e;
-  --color-blue: #4387ce;
+  --color-paper-dark: #e6e2d8;
+  --color-red: #de1d24;
+  --color-red-dark: #a91318;
+  --color-blue: #4287ce;
   --color-blue-dark: #2c5f94;
   --color-blue-tint: #b9d1e6;
-  --color-gold: #faa70d;
+  --color-gold: #f9a70d;
   --color-gold-dark: #c17f09;
   --color-header: #4a9fd8;
-  --color-coffee: #4a3226;
   --color-sponsor-bg: #2e3548;
 }
 
@@ -28,7 +27,6 @@
   --color-gold: var(--color-gold);
   --color-gold-dark: var(--color-gold-dark);
   --color-header: var(--color-header);
-  --color-coffee: var(--color-coffee);
   --color-sponsor-bg: var(--color-sponsor-bg);
   --font-display: var(--font-display);
   --font-body: var(--font-body);

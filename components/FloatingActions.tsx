@@ -6,7 +6,7 @@ const WHATSAPP_NUMBER = "252600000000";
 export default function FloatingActions() {
   return (
     <div className="pointer-events-none fixed inset-x-0 bottom-0 z-40">
-      <div className="mx-auto flex max-w-6xl items-end justify-between px-4 pb-4 sm:px-6">
+      <div className="mx-auto flex max-w-[1400px] items-end justify-between px-4 pb-4 sm:px-6">
         <a
           href={`https://wa.me/${WHATSAPP_NUMBER}`}
           target="_blank"

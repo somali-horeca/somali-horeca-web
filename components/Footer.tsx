@@ -27,9 +27,9 @@ const SOCIAL_LINKS = [
 export default function Footer() {
   return (
     <footer className="border-t-2 border-gold bg-blue-dark text-paper">
-      <div className="mx-auto max-w-6xl px-6 py-14">
-        <div className="grid grid-cols-1 gap-10 md:grid-cols-4">
-          <div>
+      <div className="mx-auto max-w-[1400px] px-6 py-10">
+        <div className="grid grid-cols-2 gap-x-6 gap-y-8 md:grid-cols-4">
+          <div className="col-span-2 md:col-span-1">
             <Image src="/logo.png" alt="Somali HORECA" width={32} height={38} className="h-[38px] w-[32px]" />
             <div className="mt-3 font-serif text-lg font-bold text-paper">Somali HORECA</div>
             <p className="mt-2 text-base text-paper/70">
@@ -86,7 +86,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-12 border-t border-paper/15 pt-6 text-center text-sm text-paper/50">
+        <div className="mt-8 border-t border-paper/15 pt-5 text-center text-sm text-paper/50">
           © {new Date().getFullYear()} Somali HORECA. All rights reserved.
         </div>
       </div>

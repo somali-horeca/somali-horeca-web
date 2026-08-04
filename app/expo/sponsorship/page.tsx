@@ -54,7 +54,7 @@ export default function Sponsorship() {
       />
 
       <section className="px-6 py-16">
-        <div className="mx-auto max-w-6xl">
+        <div className="mx-auto max-w-[1400px]">
           <div className="mb-3 font-mono text-xs uppercase tracking-[0.16em] text-red">
             The Expo
           </div>

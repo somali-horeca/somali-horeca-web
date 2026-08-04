@@ -4,7 +4,7 @@ import Image from "next/image";
 export default function PlatformIntro() {
   return (
     <section className="bg-blue-dark px-6 py-16 text-paper">
-      <div className="mx-auto grid max-w-6xl items-center gap-10 md:grid-cols-2">
+      <div className="mx-auto grid max-w-[1400px] items-center gap-10 px-2 md:grid-cols-2">
         <div>
           <h2 className="font-serif text-3xl font-bold text-gold md:text-4xl">
             About Somali HORECA

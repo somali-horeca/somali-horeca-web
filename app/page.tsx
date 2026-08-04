@@ -4,7 +4,6 @@ import HeroSlider from "@/components/HeroSlider";
 import PlatformIntro from "@/components/PlatformIntro";
 import StrategicPartners from "@/components/StrategicPartners";
 import FeaturedBusinesses from "@/components/FeaturedBusinesses";
-import UpcomingExpoBanner from "@/components/UpcomingExpoBanner";
 import SponsorsStrip from "@/components/SponsorsStrip";
 import FinalCTA from "@/components/FinalCTA";
 import { LAUNCHES } from "@/lib/launches-data";
@@ -26,14 +25,10 @@ export default function Home() {
 
       <StrategicPartners />
 
-      <section className="bg-blue-tint px-6 py-16">
-        <div className="mx-auto max-w-6xl">
+      <section className="bg-paper px-6 py-16">
+        <div className="mx-auto max-w-[1400px]">
           <div className="mt-6">
             <FeaturedBusinesses />
-          </div>
-
-          <div className="mt-8">
-            <UpcomingExpoBanner />
           </div>
 
           <div className="mt-8">
@@ -72,7 +67,7 @@ export default function Home() {
       {/* Latest News — sits after Sponsors, matching the reference site's
           homepage flow (their News section comes after the sponsor tiers). */}
       <section className="px-6 py-16">
-        <div className="mx-auto max-w-6xl">
+        <div className="mx-auto max-w-[1400px]">
           <div className="flex items-baseline justify-between">
             <h3 className="font-serif text-2xl font-semibold">Latest news</h3>
             <Link href="/news" className="text-sm font-semibold text-gold-dark hover:opacity-80">
@@ -101,8 +96,8 @@ export default function Home() {
 
       {/* Gallery preview — sits near the bottom before the final CTA,
           matching the reference site's homepage flow. */}
-      <section className="bg-paper-dark px-6 py-16">
-        <div className="mx-auto max-w-6xl">
+      <section className="bg-paper px-6 py-16">
+        <div className="mx-auto max-w-[1400px]">
           <div className="flex items-baseline justify-between">
             <h3 className="font-serif text-2xl font-semibold">Gallery</h3>
             <Link href="/gallery" className="text-sm font-semibold text-gold-dark hover:opacity-80">

@@ -11,11 +11,23 @@ const SUBPAGES = [
   { href: "/expo/sponsorship", label: "Sponsorship", tone: "bg-ink" },
 ];
 
-const TODO = [
-  "Event overview — dates, venue",
-  "Conference agenda + speaker profiles",
-  "Product launches, networking events, media centre",
-  "Post-event highlights, photos, videos (stays live year-round)",
+// TEMPORARY DEMO DATA — client confirmed the real exhibitor/participant and
+// speaker/host list isn't finalized yet. Swap these arrays for the real
+// roster once the client provides it.
+const PARTICIPANTS = [
+  { name: "Barwaaqo Hotel Group", type: "Hotel Chain" },
+  { name: "Hargeisa Fresh Suppliers", type: "Food Supplier" },
+  { name: "Banadir Catering Co.", type: "Catering" },
+  { name: "Golis Coffee Roasters", type: "Beverage Supplier" },
+  { name: "Juba Restaurant Collective", type: "Restaurant Group" },
+  { name: "Horn Hospitality Equipment", type: "Equipment Supplier" },
+];
+
+const HOSTS = [
+  { name: "Amina Yusuf", role: "Founder, Barwaaqo Hotel Group" },
+  { name: "Abdirahman Hassan", role: "Somalia Ministry of Tourism" },
+  { name: "Faadumo Cali", role: "Hospitality Investment Advisor" },
+  { name: "Mohamed Warsame", role: "Somali HORECA Platform Lead" },
 ];
 
 export default function Expo() {
@@ -38,15 +50,47 @@ export default function Expo() {
             Somalia&apos;s premier hospitality exhibition and conference.
           </p>
 
-          <div className="mt-10 rounded-md border border-paper/25 bg-ink/20 p-6">
-            <div className="mb-3 font-mono text-xs uppercase tracking-wider text-gold">
-              To build on this page
+          <div className="mt-8 flex flex-wrap gap-6 rounded-md border border-paper/25 bg-ink/20 p-6 text-sm">
+            <div>
+              <div className="font-mono text-xs uppercase tracking-wider text-gold">Location</div>
+              <div className="mt-1 font-semibold">Mogadishu Convention Centre</div>
             </div>
-            <ul className="list-inside list-disc space-y-2 text-sm text-paper/85">
-              {TODO.map((item) => (
-                <li key={item}>{item}</li>
+            <div>
+              <div className="font-mono text-xs uppercase tracking-wider text-gold">Date</div>
+              <div className="mt-1 font-semibold">14–16 March 2027</div>
+            </div>
+          </div>
+
+          {/* DEMO DATA — see PARTICIPANTS above; swap for the real exhibitor
+              roster once the client provides it. */}
+          <div className="mt-12">
+            <h2 className="font-serif text-xl font-bold text-gold">Yaa kasoo qaybgalaayo</h2>
+            <p className="mt-1 text-sm text-paper/70">Participating businesses (demo data)</p>
+            <div className="mt-5 grid gap-4 sm:grid-cols-2 md:grid-cols-3">
+              {PARTICIPANTS.map((p) => (
+                <div key={p.name} className="rounded-md border border-paper/20 bg-paper/10 p-4">
+                  <div className="font-semibold">{p.name}</div>
+                  <div className="mt-1 font-mono text-xs uppercase tracking-wider text-blue-tint">
+                    {p.type}
+                  </div>
+                </div>
               ))}
-            </ul>
+            </div>
+          </div>
+
+          {/* DEMO DATA — see HOSTS above; swap for the real speaker/host
+              lineup once the client provides it. */}
+          <div className="mt-12">
+            <h2 className="font-serif text-xl font-bold text-gold">Yaa jeedinaayo</h2>
+            <p className="mt-1 text-sm text-paper/70">Speakers &amp; hosts (demo data)</p>
+            <div className="mt-5 grid gap-4 sm:grid-cols-2 md:grid-cols-3">
+              {HOSTS.map((h) => (
+                <div key={h.name} className="rounded-md border border-paper/20 bg-paper/10 p-4">
+                  <div className="font-semibold">{h.name}</div>
+                  <div className="mt-1 text-xs text-paper/70">{h.role}</div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>

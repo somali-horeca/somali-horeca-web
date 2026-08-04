@@ -11,7 +11,7 @@ import Image from "next/image";
 export default function RotatingLogoTile({
   images,
   tileBorder,
-  size = "h-24 w-48",
+  size = "h-28 w-full sm:h-32",
   intervalMs = 3500,
   startDelayMs = 0,
 }: {
@@ -48,7 +48,7 @@ export default function RotatingLogoTile({
             i === active ? "opacity-100" : "opacity-0"
           }`}
         >
-          <Image src={src} alt="" fill className="object-cover" sizes="192px" />
+          <Image src={src} alt="" fill className="object-cover" sizes="256px" />
         </div>
       ))}
     </div>
