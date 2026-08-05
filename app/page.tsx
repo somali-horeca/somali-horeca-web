@@ -8,7 +8,7 @@ import SponsorsStrip from "@/components/SponsorsStrip";
 import FinalCTA from "@/components/FinalCTA";
 import { LAUNCHES } from "@/lib/launches-data";
 import { NEWS_ITEMS } from "@/lib/news-data";
-import { getHeroSlides } from "@/lib/sanity-queries";
+import { getHeroSlides, getLatestNewsPosts, getGalleryPhotos } from "@/lib/sanity-queries";
 import { urlFor } from "@/lib/sanity";
 
 // PLACEHOLDER PHOTOS for the homepage Gallery preview — swap for real photos
@@ -23,6 +23,9 @@ export default async function Home() {
     caption: s.description ?? "",
     linkUrl: s.linkUrl,
   }));
+
+  const sanityNews = await getLatestNewsPosts().catch(() => []);
+  const sanityGallery = await getGalleryPhotos().catch(() => []);
 
   return (
     <>
@@ -84,10 +87,25 @@ export default async function Home() {
             </Link>
           </div>
           <div className="mt-6 grid gap-5 md:grid-cols-3">
-            {NEWS_ITEMS.slice(0, 3).map((n) => (
+            {(sanityNews.length > 0
+              ? sanityNews.map((n) => ({
+                  key: n._id,
+                  href: "/news",
+                  photo: urlFor(n.mainImage).width(700).height(460).fit("crop").url(),
+                  date: new Date(n.publishDate).toLocaleDateString("en-US", { month: "long", year: "numeric" }),
+                  title: n.title,
+                }))
+              : NEWS_ITEMS.slice(0, 3).map((n) => ({
+                  key: n.slug,
+                  href: "/news",
+                  photo: n.photo,
+                  date: n.date,
+                  title: n.title,
+                }))
+            ).map((n) => (
               <Link
-                key={n.slug}
-                href="/news"
+                key={n.key}
+                href={n.href}
                 className="overflow-hidden rounded-md bg-paper-dark transition hover:bg-gold/10"
               >
                 <div className="relative h-40 w-full">
@@ -114,10 +132,16 @@ export default async function Home() {
             </Link>
           </div>
           <div className="mt-6 grid grid-cols-2 gap-4 md:grid-cols-4">
-            {GALLERY_PREVIEW.map((photo) => (
-              <Link key={photo} href="/gallery" className="relative aspect-square overflow-hidden rounded-md">
+            {(sanityGallery.length > 0
+              ? sanityGallery.map((g) => ({
+                  key: g._id,
+                  photo: urlFor(g.image).width(600).height(600).fit("crop").url(),
+                }))
+              : GALLERY_PREVIEW.map((photo) => ({ key: photo, photo }))
+            ).map((g) => (
+              <Link key={g.key} href="/gallery" className="relative aspect-square overflow-hidden rounded-md">
                 <Image
-                  src={photo}
+                  src={g.photo}
                   alt=""
                   fill
                   className="object-cover transition hover:scale-105"
