@@ -1,0 +1,16 @@
+import { client } from "./sanity";
+
+async function test() {
+  const data = await client.fetch(`*[]{_type}`);
+  console.log(data);
+}
+
+test();import { client } from "./sanity";
+cd ~/Documents/somali-horeca-v2/studio
+npx sanity documents query '*[]'
+async function test() {
+  const data = await client.fetch(`*[_type == "post"]`);
+  console.log(data);
+}
+
+test();

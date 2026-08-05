@@ -3,7 +3,13 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { EXPO_VENUE, pad, useCountdown } from "@/lib/expo-countdown";
+import {
+  FALLBACK_EXPO_DATE,
+  FALLBACK_EXPO_DATE_RANGE_TEXT,
+  FALLBACK_EXPO_VENUE,
+  pad,
+  useCountdown,
+} from "@/lib/expo-countdown";
 
 const NAV_LINKS = [
   { href: "/about", label: "About" },
@@ -16,11 +22,14 @@ const NAV_LINKS = [
   { href: "/contact", label: "Contact" },
 ];
 
-// PLACEHOLDER DATE TEXT — keep in sync with EXPO_DATE in lib/expo-countdown.ts
-const EXPO_DATE_RANGE = "14–16 MAR 2027";
+type HeaderProps = {
+  expoDate?: string;
+  expoDateRangeText?: string;
+  expoVenue?: string;
+};
 
-function HeaderCountdown() {
-  const time = useCountdown();
+function HeaderCountdown({ expoDate }: { expoDate: string }) {
+  const time = useCountdown(expoDate);
 
   return (
     <div className="flex items-center gap-1 sm:gap-2">
@@ -41,7 +50,14 @@ function HeaderCountdown() {
   );
 }
 
-export default function Header() {
+// Accepts Site Settings data fetched from Sanity by the parent layout
+// (a Server Component). Falls back to the placeholder date/venue if Sanity
+// content isn't set yet, so the site never breaks or shows blank.
+export default function Header({
+  expoDate = FALLBACK_EXPO_DATE,
+  expoDateRangeText = FALLBACK_EXPO_DATE_RANGE_TEXT,
+  expoVenue = FALLBACK_EXPO_VENUE,
+}: HeaderProps) {
   const [open, setOpen] = useState(false);
 
   // Lock body scroll while the mobile panel is open.
@@ -68,13 +84,13 @@ export default function Header() {
           </Link>
 
           <div className="hidden shrink-0 whitespace-nowrap rounded-sm border border-paper/30 bg-blue-dark px-2.5 py-1.5 leading-tight text-paper sm:block sm:px-4 sm:py-2">
-            <div className="font-mono text-[10px] font-bold text-paper sm:text-xs">{EXPO_DATE_RANGE}</div>
-            <div className="text-[8px] text-paper/90 sm:text-[9px]">{EXPO_VENUE}</div>
+            <div className="font-mono text-[10px] font-bold text-paper sm:text-xs">{expoDateRangeText}</div>
+            <div className="text-[8px] text-paper/90 sm:text-[9px]">{expoVenue}</div>
           </div>
         </div>
 
         <div className="flex shrink-0 items-center gap-1.5 sm:gap-2">
-          <HeaderCountdown />
+          <HeaderCountdown expoDate={expoDate} />
 
           <Link
             href="/expo"
@@ -109,8 +125,8 @@ export default function Header() {
       >
         <nav className="flex flex-col divide-y divide-paper/10 px-6">
           <div className="py-3.5 sm:hidden">
-            <div className="font-mono text-xs font-bold text-paper">{EXPO_DATE_RANGE}</div>
-            <div className="text-[10px] text-paper/70">{EXPO_VENUE}</div>
+            <div className="font-mono text-xs font-bold text-paper">{expoDateRangeText}</div>
+            <div className="text-[10px] text-paper/70">{expoVenue}</div>
           </div>
           {NAV_LINKS.map((link) => (
             <Link

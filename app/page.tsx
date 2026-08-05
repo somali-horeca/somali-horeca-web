@@ -8,17 +8,26 @@ import SponsorsStrip from "@/components/SponsorsStrip";
 import FinalCTA from "@/components/FinalCTA";
 import { LAUNCHES } from "@/lib/launches-data";
 import { NEWS_ITEMS } from "@/lib/news-data";
+import { getHeroSlides } from "@/lib/sanity-queries";
+import { urlFor } from "@/lib/sanity";
 
 // PLACEHOLDER PHOTOS for the homepage Gallery preview — swap for real photos
 const GALLERY_PREVIEW = Array.from({ length: 4 }).map(
   (_, i) => `https://picsum.photos/seed/horeca-gallery-${i + 1}/600/600`
 );
 
-export default function Home() {
+export default async function Home() {
+  const heroSlidesFromSanity = await getHeroSlides().catch(() => []);
+  const heroSlides = heroSlidesFromSanity.map((s) => ({
+    photo: urlFor(s.image).width(1600).height(700).fit("crop").url(),
+    caption: s.description ?? "",
+    linkUrl: s.linkUrl,
+  }));
+
   return (
     <>
       {/* Hero: full-width photo slider, no sidebar — matches the reference site's edge-to-edge banner */}
-      <HeroSlider />
+      <HeroSlider slides={heroSlides} />
 
       {/* "Somali HORECA" platform explainer */}
       <PlatformIntro />

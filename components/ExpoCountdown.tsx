@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { EXPO_VENUE, pad, useCountdown } from "@/lib/expo-countdown";
+import { FALLBACK_EXPO_VENUE, pad, useCountdown } from "@/lib/expo-countdown";
 
 export default function ExpoCountdown({ compact = false }: { compact?: boolean }) {
   const time = useCountdown();
@@ -22,7 +22,7 @@ export default function ExpoCountdown({ compact = false }: { compact?: boolean }
             </div>
           ))}
         </div>
-        <div className="mt-1.5 text-[11px] text-ink/50">{EXPO_VENUE}</div>
+        <div className="mt-1.5 text-[11px] text-ink/50">{FALLBACK_EXPO_VENUE}</div>
         <Link href="/expo" className="mt-1.5 inline-block text-xs font-semibold text-red hover:opacity-80">
           Register now →
         </Link>
@@ -47,7 +47,7 @@ export default function ExpoCountdown({ compact = false }: { compact?: boolean }
           </div>
         ))}
       </div>
-      <div className="mt-2 text-xs text-ink/50">{EXPO_VENUE} · date TBD, placeholder</div>
+      <div className="mt-2 text-xs text-ink/50">{FALLBACK_EXPO_VENUE} · date TBD, placeholder</div>
       <Link
         href="/expo"
         className="mt-3 inline-block text-sm font-semibold text-red hover:opacity-80"
